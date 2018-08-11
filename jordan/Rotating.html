@@ -1,0 +1,182 @@
+<script>
+/* code to rotate product images */
+jQuery(document).ready(function(){
+   
+  jQuery('.owl-wrapper div.owl-item a').first().addClass('active');
+  //alert();
+  jQuery(document).on('click','.turnBack',function(){
+      
+       var variantImg=$('input[name=option-0]:checked', '#add-to-cart-form').val();
+       var variantImg=variantImg.toLowerCase();  
+       //alert('variant'+variantImg);
+       var currentImg=$('#product-featured-image').attr('src');
+       //alert('current'+currentImg);
+        $(".owl-item img").each(function() {
+           var altVal= $(this).attr('alt'); //red-back
+           var backVariant =  variantImg+'-back';
+           var frontVariant =  variantImg+'-front';
+            if(backVariant == altVal)
+            {
+              var nextImg= $(this).attr('src');
+              $('#product-featured-image').attr('src',nextImg.replace('compact', 'grande'));
+              $('.zoomWindow').css({ backgroundImage: "url('" +nextImg.replace('compact', '1024X1024')+ "')" });
+               var nowImg=$('#product-featured-image').attr('src');
+               //alert('nowImg'+nowImg);
+                if( currentImg == nowImg)
+                {
+                   var activeImg= $('.owl-item a.active img').attr('src');
+                   $('#product-featured-image').attr('src',activeImg.replace('compact', 'grande'));
+                   $('.zoomWindow').css({ backgroundImage: "url('" +activeImg.replace('compact', '1024X1024')+ "')" });
+                }
+            }
+        });
+    });
+});
+
+
+var productMainImg = $('.product-main-img').attr('src');
+var productMainImg = productMainImg.split('?v');
+var total = $('.gallery-image').length;
+alert(total);
+$(".gallery-image").each(function(i) {
+  var variantSelected = $(this).attr('data-default-res');
+  var variantSelected = variantSelected.split('?v');
+  
+  if(productMainImg[0] === variantSelected[0])
+  {
+    var startIndex = i;
+    var uptoIndex = i+12;
+    for (i = startIndex; i <= uptoIndex; i++) {
+      $("image-"+i).css('display','block');    
+    }
+    if(uptoIndex < total)
+    {
+      for (i = uptoIndex+1; i <= total; i++) {
+        $("image-"+i).css('display','none');    
+      } 
+    }
+    return false;
+  }
+  else
+  {
+    $(this).css('display','none');
+  }
+});
+//cdn.shopify.com/s/files/1/2450/4999/products/1A5A7891-2_done_pink_600x600.jpg?v=1509528267
+//cdn.shopify.com/s/files/1/2450/4999/products/1A5A7891-2_done_pink_600x600.jpg?v=1509535192
+</script>  
+
+==================================
+1st click
+current//cdn.shopify.com/s/files/1/1507/9106/products/mockup-6b45fcfb_grande.jpg?v=1484350272
+current//cdn.shopify.com/s/files/1/1507/9106/products/mockup-6b45fcfb_grande.jpg?v=1484350272
+
+2nd click
+current//cdn.shopify.com/s/files/1/1507/9106/products/mockup-9865a716_grande.jpg?v=1484382534
+current//cdn.shopify.com/s/files/1/1507/9106/products/mockup-9865a716_grande.jpg?v=1484382534
+
+ $('.swatch :radio').change(function() {
+            var optionIndex = $(this).closest('.swatch').attr('data-option-index');
+            var optionValue = $(this).val();
+            $(this)
+                .closest('form')
+                .find('.single-option-selector')
+                .eq(optionIndex)
+                .val(optionValue)
+                .trigger('change');
+        }); 
+
+
+
+
+
+Select product variants by clicking their images
+=================================
+https://help.shopify.com/themes/customization/products/select-variants-by-clicking-images
+
+===============================
+switch case product-loop
+-----------------
+
+{% assign index = 4 %}
+            {% for i in (1..8) %}
+              {% case i %}
+                {% when 7 %}
+                  {% assign index = 1 %}
+                {% when 8 %}
+                  {% assign index = 2 %}
+              {% endcase %}
+
+              ====================================
+
+              
+<body id="shopifyAPP">
+<div class="loading-dots" id="loading-dots">
+<center>
+<div class="loaderDots">Loading...</div>
+</center>
+</div>
+<?php
+$i = 0;
+$result = $sc->getProducts();
+
+echo '<a href="billingDetails.php" style="margin-left:40px; margin-top:40px;"><button class="btn btn-warning">Billing Details</button></a>';
+
+echo '<div class="ProductDiv">';
+echo '<ul>';
+foreach ($result as $key => $value) {
+if($value->vendor_access=="yes")
+{
+  if(!$value->platformProductId)
+   {
+echo '<li>';
+}
+else
+{
+  echo '<li class="addedProduct">';
+}
+echo '<form id="form-'.$value->id.'">';
+
+$total_price = ($value->dropshipping_price+($value->dropshipping_price)*($value->commission/100));
+$getprice=($total_price)*($rate);
+
+echo '<input type="hidden" name="title" value="'.$value->title.'">';
+echo '<input type="hidden" name="price" data-total-price="'.$total_price.'" value="'.round($getprice,2).'">';
+echo '<input type="hidden" name="image" value="'.$value->images[0].'">';
+echo '<input type="hidden" name="description" value="'.$value->description.'<p><h4><q>Shipped directly by label</q></h4></p>">';
+echo '<input type="hidden" name="sku" value="'.$value->sku.'">';
+echo '<input type="hidden" name="vendor" value="'.$value->vendor.'">';
+echo '<input type="hidden" name="user_id" value="'.$value->user_id.'">';
+echo '<input type="hidden" name="mvp_product_id" value="'.$value->id.'">';
+echo '<input type="hidden" name="quantity" value="'.$value->quantity.'">';
+echo '<input type="hidden" id="platform_product_id'.'-'.$value->id.'" name="platform_product_id" value="'.$value->platformProductId.'">';
+
+
+echo '<div class="ProductImg"><img src="'.$value->images[0].'" /></div>';
+echo '<div class="ProductDesc">';
+echo '<span class="ProductTitle">'.$value->title.'</span>';
+echo '<span class="ProductVendor">'.$value->vendor.'</span>';
+echo '<span class="ProductPrice" data-price-euro="'.$value->dropshipping_price.'">'.$symbol[0].round($getprice,2).'</span>';
+echo "</div>";
+$a = 0;
+$r =1;
+if(!$value->platformProductId)
+   {
+ echo '<div class="OnHover"><input type="submit" value="Add to Shopify" id="button-'.$value->id.'" onclick="ProductEvent(event,'.$value->id.','.$a.')" /></div>';
+}
+else
+{
+ echo '<div class="OnHover"><input type="submit" value="Remove from Shopify" id="button-'.$value->id.'" onclick="ProductEvent(event,'.$value->id.','.$r.')" /></div>';
+}
+echo '<div class="available-qty"> Quantity Available: <span>'.$value->quantity.'</span></div>';
+echo '</form>';
+echo '</li>';
+++$i;
+ }elseif ($value->vendor_access=="no") {
+
+ }
+}
+
+echo '</ul>';
+echo '</div>';
+

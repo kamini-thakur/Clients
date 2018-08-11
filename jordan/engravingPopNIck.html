@@ -1,0 +1,635 @@
+
+
+<input type="button" class="btn" name="answer" value="Engrave..." onclick="showDiv()" />
+
+<div id="welcomeDiv" class="popup_watch_main" style="display:none;" >
+  <div class="popup_watch_outer">
+    <div class="popup_inner">
+      
+      <!-----------Text only---------->
+      <div class="popup_left" id="textOnly">
+        <img src="{{ 'caseback2.png' | asset_url }}" alt="" />
+       
+        <div class="popup_table_absolute">
+          <div class="popup_table">
+            <div class="popup_table_cell">
+              <span id="message1" class="popup_type_text1">
+
+              </span>
+              <span id="message2" class="popup_type_text2">
+
+              </span>
+              <span id="message3" class="popup_type_text3">
+
+              </span>
+            </div>
+          </div>
+        </div>  
+      </div>
+      
+       <!-----------Text images---------->
+      <div class="popup_left" id="textImages" style="display:none;">
+        <img src="{{ 'caseback2.png' | asset_url }}" alt="" />
+       
+        <div class="popup_table_absolute">
+          <div class="popup_table">
+            <div class="popup_table_cell">
+              
+              <span id="getUploadedImg" class="popup_type_text5">
+            
+              </span>
+              <span class="UserUploadedImg" id="UserUpload">
+                
+              </span>
+              <span id="getLogoImg" class="popup_type_text6 UserUploadedImg">
+                
+              </span>
+              
+              <span id="message4" class="popup_type_text4">
+              </span>
+            </div>
+          </div>
+        </div>  
+      </div>
+      
+      
+      <button class="close_pop" type="button" onclick="hidePopDiv()"><img src="{{ 'imgpsh_fullsize_close.png' | asset_url }}" alt="" /></button>
+      <div class="pop_up_right"> 
+        <h1>FREE ENGRAVING</h1>
+        <div id="tabs">
+          <ul>
+            <li><a href="#tabs-1" id="tab1">Text Only</a></li>
+            <li><a href="#tabs-2" id="tab2">Image & Text</a></li>
+          </ul>
+
+          <!----------First-tab---------->
+          <div id="tabs-1" class="clearfix">
+            <h6>Enter your message below</h6>
+            <div class="popup_right_field">
+              <div class="popup_field_inner">
+                <input id="input_mess1" type="text" placeholder="Line 1" id="msg1_{{ product.variants.first.id }}"> 
+                <span class="message_num">0</span><span>/15</span>
+              </div>
+              <div class="popup_field_inner">
+                <input id="input_mess2" type="text" placeholder="Line 2" maxlength="15" id="msg2_{{ product.variants.first.id }}"> 
+                <span class="message_num">0</span><span>/15</span>
+              </div>
+              <div class="popup_field_inner">
+                <input id="input_mess3" type="text" placeholder="Line 3" maxlength="15" id="msg3_{{ product.variants.first.id }}"> 
+                <span class="message_num">0</span><span>/15</span>
+              </div>
+            </div>
+
+            <div class="popup_submit">
+              <input type="button" value="CHECKOUT" onclick="addTocart()">
+            </div>
+          </div>
+          <!----------Second-tab---------->
+          <div id="tabs-2"  class="clearfix">
+            <h6>Choose your image from category below: </h6>
+            <div class="popup_field_inner">
+              <select id="LogoCat">
+                <option value="cat_0" selected="selected">Upload own image</option>
+                {% for i in (1..6) %}
+                {% capture CatEnable %}Category_{{ i }}_enabled{% endcapture %}
+                {% capture CatName %}logocategory_{{ i }}{% endcapture %}
+                {% if settings[CatEnable] %}
+                <option value="cat_{{ i }}">{{ settings[CatName] }}</option>
+                {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+            <div class="popup_field_inner" id="UploadFile">
+              <label>
+                <input type="file" id="uploadImg">
+                <span id="selectFile">Select your file to upload</span>
+                <span class="browseBtn">Browse</span>
+              </label>
+              <div class="guideLines">See our guidelines <a href="#">here</a></div>
+            </div>
+            <div class="ImageGallery" style="display:none;" id="getImg">
+             
+              <div id="cat_1" style="display:none;">
+
+                {% capture CatEnable %}Category_1_enabled{% endcapture %}
+                {% if settings[CatEnable] %}
+                {% for j in (1..100) %}
+
+                {% capture logoImageEnable %}badge1_{{ j }}_enabled{% endcapture %}
+                {% capture logoImage %}badge1_{{ j }}.jpg{% endcapture %}
+                {% capture logoName %}badge1_{{ j }}_text{% endcapture %}
+                {% if settings[logoImageEnable] %}
+                <label class="imgsWrap">
+                  <input type="radio" name="radioName" value='{{ logoImage | asset_url | img_tag }}' data-logoName="{{ settings[logoName] }}" />
+                  <span> {{ logoImage | asset_url | img_tag }}<span>{{ settings[logoName] }}</span></span>
+                  
+                </label>
+                {% endif %}
+
+                {% endfor %}
+                {% endif %}
+
+              </div>
+              <div id="cat_2" style="display:none;">
+
+                {% capture CatEnable %}Category_2_enabled{% endcapture %}
+                {% if settings[CatEnable] %}
+                {% for j in (1..100) %}
+
+                {% capture logoImageEnable %}badge2_{{ j }}_enabled{% endcapture %}
+                {% capture logoImage %}badge2_{{ j }}.jpg{% endcapture %}
+                {% capture logoName %}badge2_{{ j }}_text{% endcapture %}
+                {% if settings[logoImageEnable] %}
+                <label class="imgsWrap">
+                 <input type="radio" name="radioName" value='{{ logoImage | asset_url | img_tag }}' />
+                  <span> {{ logoImage | asset_url | img_tag }}<span>{{ settings[logoName] }}</span></span>
+                </label>
+                {% endif %}
+
+                {% endfor %}
+                {% endif %}
+              </div>
+              <div id="cat_3" style="display:none;">
+
+                {% capture CatEnable %}Category_3_enabled{% endcapture %}
+                {% if settings[CatEnable] %}
+                {% for j in (1..100) %}
+
+                {% capture logoImageEnable %}badge3_{{ j }}_enabled{% endcapture %}
+                {% capture logoImage %}badge3_{{ j }}.jpg{% endcapture %}
+                {% capture logoName %}badge3_{{ j }}_text{% endcapture %}
+                {% if settings[logoImageEnable] %}
+                <label class="imgsWrap">
+                 <input type="radio" name="radioName" value='{{ logoImage | asset_url | img_tag }}' />
+                  <span> {{ logoImage | asset_url | img_tag }}<span>{{ settings[logoName] }}</span></span>
+                </label>
+                {% endif %}
+
+                {% endfor %}
+                {% endif %}
+              </div>
+              <div id="cat_4" style="display:none;">
+
+                {% capture CatEnable %}Category_4_enabled{% endcapture %}
+                {% if settings[CatEnable] %}
+                {% for j in (1..100) %}
+
+                {% capture logoImageEnable %}badge4_{{ j }}_enabled{% endcapture %}
+                {% capture logoImage %}badge4_{{ j }}.jpg{% endcapture %}
+                {% capture logoName %}badge4_{{ j }}_text{% endcapture %}
+                {% if settings[logoImageEnable] %}
+                <label class="imgsWrap">
+                 <input type="radio" name="radioName" value='{{ logoImage | asset_url | img_tag }}' />
+                  <span> {{ logoImage | asset_url | img_tag }}<span>{{ settings[logoName] }}</span></span>
+                </label>
+                {% endif %}
+
+                {% endfor %}
+                {% endif %}
+              </div>
+              <div id="cat_5" style="display:none;">
+
+                {% capture CatEnable %}Category_5_enabled{% endcapture %}
+                {% if settings[CatEnable] %}
+                {% for j in (1..100) %}
+
+                {% capture logoImageEnable %}badge5_{{ j }}_enabled{% endcapture %}
+                {% capture logoImage %}badge5_{{ j }}.jpg{% endcapture %}
+                {% capture logoName %}badge5_{{ j }}_text{% endcapture %}
+                {% if settings[logoImageEnable] %}
+                <label class="imgsWrap">
+                 <input type="radio" name="radioName" value='{{ logoImage | asset_url | img_tag }}' />
+                  <span> {{ logoImage | asset_url | img_tag }}<span>{{ settings[logoName] }}</span></span>
+                </label>
+                {% endif %}
+
+                {% endfor %}
+                {% endif %}
+              </div>
+             
+            </div>
+            
+            <div class="guideLines">Enter your message below</div>
+            <div class="popup_field_inner">
+              <input id="input_mess4" type="text" placeholder="Add text" maxlength="15" id="msg4_{{ product.variants.first.id }}"> 
+              <span class="message_num">0</span><span>/15</span>
+            </div>
+
+
+            <div class="popup_submit">
+              <input type="button" value="CHECKOUT" id="AddImages">
+            </div>
+
+
+          </div><!-----second tab close------->
+        </div>        
+      </div>
+      <span id="bottomMsg" align="center"> For Illustrative Purposes Only. Engraved watches are non-returnable unless faulty. </span>
+
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+  function showDiv() {
+    document.getElementById('welcomeDiv').style.display = "block";
+
+    var root = document.getElementsByTagName( 'html' )[0]; // '0' to assign the first (and only `HTML` tag)
+
+    root.setAttribute( 'class', 'mypopup' );  
+
+  }
+
+
+  function hidePopDiv() {
+
+    document.getElementById('welcomeDiv').style.display = "none";
+
+    $("html").removeClass("mypopup");
+
+    var cur_price = $("#cur_price").attr('content');
+    var add_price= parseFloat(cur_price)+10;
+    var currentCurrency=Currency.cookie.read();
+
+    switch(currentCurrency)
+    {
+      case 'GBP':
+        $('#cur_price .current_price').html('<span class="money">&pound;'+add_price+'</span>');
+        break;
+      case 'USD': 
+        $('#cur_price .current_price').html('<span class="money">&dollar;'+add_price+'</span>');
+        break;
+      case 'EUR': 
+        $('#cur_price .current_price').html('<span class="money">&euro;'+add_price+'</span>');
+        break;
+    }
+
+  }
+  function addTocart()
+  {
+
+    var line1Msg = $("#input_mess1").val();
+
+
+    var line2Msg = $("#input_mess2").val();
+
+
+    var line3Msg = $("#input_mess3").val();
+
+
+    var data={quantity: 1,id:'29611068867',
+              properties: {
+                'Line 1': line1Msg,
+                'Line 2':line2Msg,
+                'Line 3':line3Msg
+              }
+             };
+    $.ajax({
+      url: '/cart/add.js',
+      dataType: 'json',
+      type: 'post',
+      data: data,
+      success: function(itemData) {
+        $('#AddToCart').trigger('click');
+        // Re-enable add to cart button.
+
+
+        return ;
+        //addPersonalizeItem
+
+
+      }, 
+      error: function(XMLHttpRequest) {
+        var response = eval('(' + XMLHttpRequest.responseText + ')');
+        response = response.description;
+        alert(response);
+
+      }
+    });
+  }
+
+
+</script>
+
+<script type="text/javascript">
+
+  //   $('.popup_field_inner input').keyup(updateCount);
+  // $('.popup_field_inner input').keydown(updateCount);
+
+  // function updateCount() {
+  //     var cs = $(this).val().length;
+  //   $(this).closest('.popup_field_inner').find('.message_num').text(cs);
+
+  // }
+
+  var maxLen = 15;
+  $('.popup_field_inner input').keypress(function(event){
+    var Length = $(this).val().length;
+    $(this).closest('.popup_field_inner').find('.message_num').text(Length);
+    if(Length >= maxLen){
+      if (event.which != 8) {
+        return false;
+      }
+    }
+  });
+
+
+
+  $("#input_mess1").keyup(function(){
+    var newVideoName = $("#input_mess1").val();
+    $("#message1").text(newVideoName);
+
+  });
+  $("#input_mess2").keyup(function(){
+    var newVideoName = $("#input_mess2").val();
+    $("#message2").text(newVideoName);
+
+  });
+  $("#input_mess3").keyup(function(){
+    var newVideoName = $("#input_mess3").val();
+    $("#message3").text(newVideoName);
+  });
+  
+  
+  $("#input_mess4").keyup(function(){
+    var newVideoName = $("#input_mess4").val();
+    $("#message4").text(newVideoName);
+
+  });
+</script>
+
+<script>
+  /* Code for uploading logo image */
+
+  $( function() {
+    $( "#tabs" ).tabs();
+  } );
+
+  
+  $('#getImg input').on('change', function() {
+    var imgValue = $('input[name=radioName]:checked','#getImg').val(); 
+    $("#getLogoImg").html(imgValue);
+  });
+   
+  /* Upload image code */
+  function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            //$('#Uploaded').attr('src', e.target.result);
+            var image = '<img src="'+e.target.result+'">';
+            $('#UserUpload').html(image);
+            var ImgType = document.getElementById('uploadImg').files[0];
+            var type = ImgType.type;
+            var IsImg =type.split('/')[0];
+            if(IsImg != 'image')
+            {
+              alert('Please upload an image');
+            }
+        }
+
+        reader.readAsDataURL(input.files[0]);
+        
+        
+    }
+    }
+
+    $("#uploadImg").change(function(){
+        readURL(this);
+    });
+ 
+    $('#Uploaded').error(function(){
+      //$(this).hide();
+    })
+  
+     $('#uploadImg').change(function() {
+        var filename = $('#uploadImg').val();
+        $('#selectFile').html(filename);
+        //$('#getUploadedImg').html(filename);
+    });
+  
+  
+  /* To hide and display tabs code */
+  $('#tab1').click(function(e){
+    $('#textOnly').css('display','block');
+    $('#textImages').css('display','none');
+  });
+  $('#tab2').click(function(e){
+    $('#textOnly').css('display','none');
+    $('#textImages').css('display','block');
+  });
+  
+  /* Image gallery code */
+  $('#LogoCat').change(function(){
+    var category = $( "#LogoCat option:selected" ).val();
+    //alert(category);
+    if(category != 'cat_0' )
+    {
+      $('.ImageGallery').css('display','block');
+      $('[id^=cat]').hide();
+      $('#'+category).css('display','block');
+      $('#UploadFile').css('display','none');
+      $('#UserUpload').css('display','none');
+      $('#getLogoImg').css('display','block');
+    }
+    else
+    {
+      $('.ImageGallery').css('display','none');
+      $('#UploadFile').css('display','block');
+      $('#getLogoImg').css('display','none');
+      $('#UserUpload').css('display','block');
+    }
+  });
+
+  /* Add to cart code goes here */
+  $(document).ready(function(){
+
+    $('#AddImages').click(function(e){  
+      //alert('hi');
+      var LogoCategory  = $('#LogoCat option:selected').text();
+      
+      if(LogoCategory == 'Upload own image')
+      {
+        var UploadedImg = $('#uploadImg').val();
+      }
+      else
+      {
+        //var selectedLogo = $('#getImg input').attr('data-logoName');
+        var selectedLogo = $('input[name=radioName]:checked','#getImg').attr('data-logoName');
+      }
+      var line4Msg = $("#input_mess4").val();
+      var data={quantity: 1,id:'29611068867',
+                properties: {
+                  'Logo category': LogoCategory,
+                  'Selected logo': selectedLogo,
+                  'Uploaded image': UploadedImg,
+                  'Message':line4Msg
+                }
+               };
+      $.ajax({
+        url: '/cart/add.js',
+        dataType: 'json',
+        type: 'post',
+        data: data,
+        success: function(itemData) {
+          $('#AddToCart').trigger('click');
+
+          return ;
+
+        }, 
+        error: function(XMLHttpRequest) {
+          var response = eval('(' + XMLHttpRequest.responseText + ')');
+          response = response.description;
+          alert(response);
+
+        }
+      });
+    });
+
+  });
+
+</script>   
+
+
+<style>
+  span#bottomMsg {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+  }
+</style>
+
+/*
+
+<script>
+
+  $(document).ready(function(e){
+    
+    var mobileImg=$(".mobile").attr("src");
+    var windowSize = $(window).width();
+    if(windowSize <= 640)
+    {
+      $(".collection_description").find("img:first").attr("src",mobileImg);
+      //$(".collection_description img").attr("src",mobileImg);
+      //$(".mobile").show();
+    }
+  });
+</script>
+
+*/
+
+sh-7hdbHncN7vXZ8DGZq
+
+sh-7hdbHncN7vXZ8DGZq
+
+ $getAuthToken = array( 'user' => array( 'email' => 'testeresfera@gmail.com', 'password' => 'esfera123' ));
+
+$rates_array[]=array(
+                                     'service_name'     =>  'Standard Shipping',
+                                     'service_code'     =>  'ON',
+                                     'total_price'      =>  $price,
+                                     'currency'         =>  'USD',
+                                     'min_delivery_date'=>'0000-00-00 00:00:00 -0000',
+                                      'max_delivery_date'=>'0000-00-00 00:00:00 -0000'
+                                     );
+
+=============================================
+
+                                     if(!empty($res['auth_token']))
+                      {
+                      '<div class="form-group">
+                        <label class="col-sm-3 control-label">Token</label>
+                        <div class="col-sm-9">
+                        <input type="text" name="auth_token" value="'.$res['auth_token'].'">
+                        </div>
+                      </div>'
+                      }
+                      if(!empty($res['creditcardID']))
+                      {
+                      '<div class="form-group">
+                        <label class="col-sm-3 control-label">Credit Card ID</label>
+                        <div class="col-sm-9">
+                        <input type="text" name="creditcardID"  value="'.$res['creditcardID'].'">
+                        </div>
+                      </div>'
+                      }
+
+                      shopify.expert@esoftapps.net
+                      ===================================================
+
+
+                      http://go-fetch.staging.c66.me/api/v1/users/sign_in.json
+                      =======================================
+
+                      /var/www/html/fashioncircle
+                      
+                      // store account detail for chris
+                      
+                      testing1-store1.myshopify.com
+                      myemail
+                      thakur18
+
+/////////////////// Query to get the last id from database ///////
+
+                      //echo 'inside if';
+      // $get_last_id = "SELECT id from paymentDetails order by id DESC limit 0,1" ;
+      // $exe_query = mysqli_query($newCon,$get_last_id);
+      // $result = mysqli_fetch_array($exe_query);
+      // if(isset($result['id']))
+      // {
+      //  $vendorId = '#10'.$result['id'];
+      // }
+      // else
+      // {
+      //  $vendorId = '#10';
+      // }
+      //$transactionTrackingId = 'id_'.$vendorId;
+
+      ==================================
+
+      Wedding signup page
+
+      <p>Please enter your details below to register interest in Kartel's Wedding Services.</p>
+<p> </p>
+<!-- Begin MailChimp Signup Form --><style type="text/css"><!--
+#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+  /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+     We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+--></style>
+<div id="mc_embed_signup">
+<form method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="" action="//kartel.us10.list-manage.com/subscribe/post?u=90830c02549192f94faedcca6&amp;id=6301945b35">
+<div id="mc_embed_signup_scroll">
+<h2>Subscribe to our mailing list</h2>
+<div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+<div class="mc-field-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span> </label> <input value="" name="EMAIL" class="required email" id="mce-EMAIL" type="email" /></div>
+<div class="mc-field-group"><label for="mce-FNAME">First Name <span class="asterisk">*</span> </label> <input value="" name="FNAME" class="required" id="mce-FNAME" type="text" /></div>
+<div class="mc-field-group"><label for="mce-LNAME">Last Name <span class="asterisk">*</span> </label> <input value="" name="LNAME" class="required" id="mce-LNAME" type="text" /></div>
+<div class="mc-field-group size1of2"><label for="mce-MMERGE3-month">Date of Wedding <span class="asterisk">*</span> </label>
+<div class="datefield"><span class="subfield dayfield"><input class="datepart required" pattern="[0-9]*" value="" placeholder="DD" size="2" maxlength="2" name="MMERGE3[day]" id="mce-MMERGE3-day" type="text" /></span> / <span class="subfield monthfield"><input class="datepart required" pattern="[0-9]*" value="" placeholder="MM" size="2" maxlength="2" name="MMERGE3[month]" id="mce-MMERGE3-month" type="text" /></span> / <span class="subfield yearfield"><input class="datepart required" pattern="[0-9]*" value="" placeholder="YYYY" size="4" maxlength="4" name="MMERGE3[year]" id="mce-MMERGE3-year" type="text" /></span> <span class="small-meta nowrap">( dd / mm / yyyy )</span></div>
+</div>
+<div class="mc-field-group"><label for="mce-MMERGE4">Are you the <span class="asterisk">*</span> </label>
+<select name="MMERGE4" class="required" id="mce-MMERGE4">
+<option value=""></option>
+<option value="Groom">Groom</option>
+<option value="Bride">Bride</option>
+<option value="Other">Other</option>
+</select>
+</div>
+<div id="mce-responses" class="clear">
+<div class="response" id="mce-error-response" style="display: none;"></div>
+<div class="response" id="mce-success-response" style="display: none;"></div>
+</div>
+<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+<div style="position: absolute; left: -5000px;" aria-hidden="true"><input name="b_90830c02549192f94faedcca6_6301945b35" tabindex="-1" value="" type="text" /></div>
+<div class="clear"><input value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button" type="submit" /></div>
+</div>
+</form>
+</div>
+<!--End mc_embed_signup--

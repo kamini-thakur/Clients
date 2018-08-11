@@ -1,0 +1,24 @@
+function currency_convert($Amount,$currencyfrom,$currencyto)
+{
+$buffer=file_get_contents('http://finance.yahoo.com/currency-converter');
+preg_match_all('/name=(\"|\')conversion-date(\"|\') value=(\"|\')(.*)(\"|\')>/i',$buffer,$match);
+$date=preg_replace('/name=(\"|\')conversion-date(\"|\') value=(\"|\')(.*)(\"|\')>/i','$4',$match[0][0]);
+unset($buffer);
+unset($match);
+$buffer=file_get_contents('http://finance.yahoo.com/currency/converter-results/'.$date.'/'.$Amount.'-'.strtolower($currencyfrom).'-to-'.strtolower($currencyto).'.html');
+preg_match_all('/<span class=\"converted-result\">(.*)<\/span>/i',$buffer,$match);
+$match[0]=preg_replace('/<span class=\"converted-result\">(.*)<\/span>/i','$1',$match[0]);
+unset ($buffer);
+return $match[0][0];
+}
+
+// $converted_value = currency_convert(150,'EUR','GBP');
+// echo 'new price value'.$converted_value;
+
+$converted_value = currency_convert($total_price,'EUR',$toCurrency);
+
+--------------------------------------------------------
+
+$ConvertCurrency = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22EUR'.$toCurrency.'%22)&env=store://datatables.org/alltableswithkeys&format=json';
+$converted=json_decode(file_get_contents($ConvertCurrency));
+$rate=$converted->query->results->rate->Rate;

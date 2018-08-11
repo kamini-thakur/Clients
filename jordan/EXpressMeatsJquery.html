@@ -1,0 +1,293 @@
+{% assign cities = settings.cart_city | split: ',' %}
+
+ Select City: <select id="city">
+      <option value="" selected="selected">Select a city</option>
+      {% for i in cities %}
+          <option>{{ i | strip }}</option>
+      {% endfor %}
+      </select>
+
+<form action="/cart" method="post">
+  
+  <!--Plant a tree product-->
+  <h3>{{ all_products.plant-a-tree-1.title }}</h3>
+  <img src="{{ all_products.plant-a-tree-1.images[0] | product_img_url: 'small' }}" alt="Plant a tree">
+  Where would you like to plant a tree:
+  <select id="plantCity" name="properties[plantCity]" required>
+      <option value="" selected="selected">Select a city</option>
+      {% for i in treeCities %}
+          <option>{{ i | strip }}</option>
+      {% endfor %}
+  </select>
+  
+  <input type="submit" value="Add to cart" id="AddIt" class="btn">
+
+</form>
+
+
+
+ /* Code to check delivery city */  
+  
+  $(document).ready(function(){
+    $('#checkout').click(function(e){
+      
+ 		e.preventDefault();
+      	var selectedCity = $('#city').val();
+		//alert(selectedCity);
+        
+        var allowedCity='{{ settings.cart_delivery_city | strip }}';
+        var allowCity = allowedCity.split(',');
+        var newarr = allowCity.map(function(s){
+            return s.trim();          
+        });
+      
+    	 if(selectedCity == '')
+         {
+              alert('Please select a city');
+           	  $('#city').css("border-color", "red");
+         }
+    	 else
+    	 {
+              if($.inArray(selectedCity,newarr) !== -1)
+              {
+                  window.location = '/checkout';
+              } 
+              else
+              {
+                alert("We only ship to these area: "+allowedCity);
+              }
+         }
+
+     });
+
+     /* code to send extra product to cart-page  */
+     $('#AddIt').click(function(e){
+       var CityPlant =	$('#plantCity').val();
+      //alert(CityPlant);
+       
+      if(CityPlant != '')
+      {
+       jQuery.post('/cart/add.js', {
+   		quantity: 1,
+   		id: 26288676673,
+          properties: {
+            'City':  CityPlant
+          }
+
+  	  });  
+      }  
+     });
+     
+  }); 
+==============cart page new code (29 march)=================
+<script>
+  
+/* Code to check delivery city */  
+  
+  $(document).ready(function(){
+    $('#checkout').click(function(e){
+       var formIsValid = true;
+    var message = "Please select a delivery date and time.";
+       jQuery('[name^="attributes"]').filter('.required, [required ="required"]').each(function() {
+      jQuery(this).removeClass('error');
+      if (formIsValid && (jQuery(this).val() == "" || jQuery(this).val() == null)) {
+        formIsValid = false;
+         message = jQuery(this).attr('data-error') || message;
+        jQuery(this).addClass('error');
+        alert(message);
+        e.preventDefault();
+        return false;
+      }
+    });
+    
+       
+     });
+     $('#AddIt').click(function(e){
+       e.preventDefault();
+          
+        var CityPlant = $('#plantCity').val();
+        console.log(CityPlant);  
+       
+       
+       ///////////////////
+       
+           var request = $.ajax({
+              url: '/cart/add.js',
+              method: "POST",
+              data: { quantity: 1,
+                     id: 26288676673,
+                     properties: { 'City':  CityPlant }
+                    }
+            });
+
+            request.done(function( msg ) {
+             window.location.href = '/cart';
+            });
+         request.always(function( msg ) {
+             window.location.href = '/cart';
+            }); 
+            request.fail(function( jqXHR, textStatus ) {
+              //alert( "Request failed: " + textStatus );
+    });
+       
+       
+      });
+  }); 
+
+</script>
+
+
+<style>
+    #content.cms-page .title
+    { background-image: url('{{ page.handle | append: "Banner.jpg" | asset_url }}'); background-position:left top; background-size: cover;
+  padding-top: 164px; padding-bottom: 50px; background-repeat: no-repeat;
+}
+  </style>
+
+===========to redirect an product
+onclick="location.href='{{ product.url}}'" style="cursor:pointer;"
+
+
+var r = document.referrer;
+var ref= r.split('/')[3];
+alert(ref);
+
+=============updating cart quantity after pressing enter
+$(".cartQuantity").keydown(function(e){
+      if(e.which === 13){
+          $("#updateCart").click();
+      }
+  });  
+=============Capture forloop values in an array in shopify
+{% capture getyears %}
+{% for i in (1900..year) %}
+        {{ i }} 
+    {% if forloop.last == false %},{% endif%}
+{% endfor %}
+{% endcapture %}
+{% assign years = getyears | split: ','%}
+
+=========Image sizes in shopify
+    16 x 16 – pico
+    32 x 32 – icon
+    50 x 50 – thumb
+    100 x 100 – small
+    160 x 160 – compact
+    240 x 240 – medium
+    480 x 480 – large
+    600 x600 – grande
+    1024 x 1024 – 1024 x 1024
+    2048 x 2048 – 2048 x 2048
+    Largest image – master
+
+
+<a href="{{ product.url | within: collection }}"> </a>
+
+=================Maggie cart additional products==================
+{% assign accessory = "Heritage Preservation Kit,Heritage Ceremony Kit,Expedited Service" | split: ',' %}
+
+{% assign strt = '' %}
+{% for x in cart.items %}settings.cart_city | split: ',' %}
+
+  {% if  accessory   contains x.product.title  %}
+
+      {% assign strt = strt | append: x.product.title | append:',' %}
+{% endif %}
+{% endfor %}
+ {% assign strt = strt | split:',' %}
+
+ {% for product in collections['cart-page-featured-products'].products limit: featuredProducts %}
+           {% unless strt contains product.title %}
+          {% include 'cart-list-item' %}
+          {% endunless %}
+        {% endfor %}
+
+------------------------------------------------------------------------
+        {
+    "name": "Country selector",
+    "settings": [
+      {
+        "type": "select",
+        "id": "SelectCountry",
+        "label": "Select country",
+        "options": [
+          {
+            "value": "india",
+            "label": "India"
+          },
+          {
+            "value": "aus",
+            "label": "Australia"
+          },
+          {
+            "value": "uk",
+            "label": "UK"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "countryUrl",
+        "label": "Link URL"
+      }
+      
+    ]
+  }
+
+
+  $(document).ready(function(e){
+        var countries = "{{ country | strip }}";
+        console.log('Count'+countries);
+//      var getCountry = "{{ settings.SelectCountry }}";
+//         console.log('Country'+getCountry);
+// //       var r = window.location.hash;
+// //       console.log(r);
+//      var x = window.location.pathname;
+      
+//        var path= "{{ settings.countryUrl }}"+x;
+//      console.log(path);
+      //location.href= path;
+  });
+
+  ========================================
+
+
+
+////////////////  Code to calculate percent off on products /////////////////
+ {% if product.compare_at_price_max > product.price %}
+                        
+                        {{ product.compare_at_price_min | minus: product.price | times: 100.0 | 
+                        divided_by: product.compare_at_price_min | money_without_currency | times: 100 
+                        | replace: '.0', ''}}% off
+                        {% endif %}
+
+                        ==================
+
+to show the random images
+                        https://gist.github.com/seedcms/e3620d68e0f3b0114179eeaf32a08001
+
+                        =========================================
+Craete pop-up
+
+ <script type="text/javascript">
+    if($(window).width() > 500){
+      // Fancybox Join our mailing list popup
+      
+      $(document).ready(function(){
+
+        var check_cookie = $.cookie('mailing_list_delay_popup');
+        if(check_cookie == null){
+          $.cookie('mailing_list_delay_popup', 'expires_seven_days', { expires: 7 });
+          //fire your fancybox here
+          setTimeout(function(){
+//           $.fancybox({
+//             href: "#subscribe_popup"
+//           });
+             $("#topopup").click();
+            
+          }, 15000);
+        }
+      }); 
+    };
+
+  </script>

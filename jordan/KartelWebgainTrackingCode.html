@@ -1,0 +1,111 @@
+=========================Kartel Site================================
+<!-- Google Code for Kartel PPC Conversion Page -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 955157068;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "L2XWCNWZzlsQzJS6xwM";
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/955157068/?label=L2XWCNWZzlsQzJS6xwM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-58568510-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- <webgains tracking code> -->
+<script language="javascript" type="text/javascript">
+{% assign discount_code="" %}
+{% for discount in order.discounts %}
+{% assign discount_code=discount.code %}
+{% endfor %}
+{% assign wgOrderPrice = 0 %}
+{% assign product_details= "" %}
+{% for line_item in order.line_items %}
+{% assign line_item_price=line_item.price | money_without_currency %}
+{% assign wgOrderPrice = wgOrderPrice |  plus: line_item_price %}
+{% endfor %}
+
+{% assign fordiscount=order.subtotal_price | money_without_currency | times: 100.0 | divided_by: wgOrderPrice %}
+{% for line_item in order.line_items %}
+{% assign line_item_price=line_item.price | money_without_currency | times:fordiscount | divided_by: 100 %}
+{% assign singlerow= "21107::" | append:line_item_price | append:"::" | append:line_item.quantity | append:"x" | append:line_item.title | append:"::" | append:line_item.id | append:"::" | append:discount_code %}
+{% if forloop.index0 > 0%}
+{% assign singlerow= "::|" | append:singlerow %}
+{% endif %}
+{% assign product_details=product_details | append:singlerow %}
+{% endfor %}
+
+var wgOrderReference ="{{order.order_number}}";
+var wgOrderValue ="{{order.subtotal_price | money_without_currency}}";
+var wgEventID = "21107";
+var wgComment = "";
+var wgLang = "en_EN";
+var wgsLang = "javascript-client";
+var wgVersion = "1.2";
+var wgProgramID = "11913";
+var wgSubDomain = "track";
+var wgCheckSum = "";
+var wgItems = "{{product_details}}";
+var wgVoucherCode ="{{discount_code}}";
+var wgCustomerID = "";
+var wgCurrency = "GBP";
+
+if(location.protocol.toLowerCase() == "https:") wgProtocol="https";
+else wgProtocol = "http";
+wgUri = wgProtocol + "://" + wgSubDomain + ".webgains.com/transaction.html" + "?wgver=" + wgVersion + "&wgprotocol=" + wgProtocol + "&wgsubdomain=" + wgSubDomain + "&wgslang=" + wgsLang + "&wglang=" + wgLang + "&wgprogramid=" + wgProgramID + "&wgeventid=" + wgEventID + "&wgvalue=" + wgOrderValue + "&wgchecksum=" + wgCheckSum + "&wgorderreference="  + wgOrderReference + "&wgcomment=" + escape(wgComment) + "&wglocation=" + escape(document.referrer) + "&wgitems=" + escape(wgItems) + "&wgcustomerid=" + escape(wgCustomerID) + "&wgvouchercode=" + escape(wgVoucherCode) + "&wgCurrency=" + escape(wgCurrency);
+document.write('<sc'+'ript language="JavaScript"  type="text/javascript" src="'+wgUri+'"></sc'+'ript>');
+</script>
+<noscript>
+<img src="http://track.webgains.com/transaction.html?wgver=1.2&wgprogramid=11913&wgrs=1&wgvalue={{order.subtotal_price | money_without_currency}}&wgeventid=21107&wgorderreference={{order.order_number}}&wgitems={{product_details}}&wgvouchercode={{discount_code}}&wgcustomerid=&wgCurrency=GBP" alt="" />
+</noscript>
+<!-- </webgains tracking code> -->
+
+<img src="//drs2.veinteractive.com/DataReceiverService.asmx/Pixel?journeycode=9834B157-6FF1-4001-B62A-BCBF9F0BE134" width="1" height="1"/>
+
+=======================Breo site==========================
+
+<!-- Google Code for Shopify Conversion Page -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 978886198;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "FpZ5CIOGi20Qtrzi0gM";
+if ({{ total_price }}) { var google_conversion_value = {{ total_price | money_without_currency }}; }
+var google_conversion_currency = "GBP";
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/978886198/?value={{ total_price | money_without_currency }}&amp;currency_code=GBP&amp;label=FpZ5CIOGi20Qtrzi0gM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<script>
+	window.snapppt_order_number = '{{ order_number }}';
+	window.snapppt_order_total = '{{ total_price }}';
+	window.snapppt_order_currency = '{{ shop.currency }}';
+	window.snapppt_account = "e43dfd75-eb25-41ae-85b7-0bbfd1eb21cf";
+</script>
+<script src="//snapppt.com/conversion-tracker.js"></script>
