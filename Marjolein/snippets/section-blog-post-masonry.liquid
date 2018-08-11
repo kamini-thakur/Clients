@@ -1,0 +1,52 @@
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}{% assign article_class = 'blog-post-masonry' %}
+{% assign article_class = article_class | append: ' masonry-grid-item' %}
+{% assign image_size = '500x500' %}
+
+{% if is_emphasized %}
+  {% assign article_class = article_class | append: ' masonry-grid-item-wide' %}
+  {% assign image_size = '1000x500' %}
+{% endif %}
+
+<article class="{{ article_class }}" data-masonry-item>
+  {%- if article.image -%}
+    {% assign image_url = article.image | img_url: image_size %}
+    {% assign image_alt = article.image.alt %}
+    {%- if image_alt == blank -%}
+      {% assign image_alt = article.title %}
+    {%- endif -%}
+
+    <a
+      class="blog-post-masonry-image"
+      href="{{ article.url }}"
+      style="background-image: url('{{ image_url }}');"
+    >
+      <img
+        src="{{ image_url }}"
+        alt="{{ image_alt | escape }}">
+    </a>
+  {%- endif -%}
+
+  <div class="blog-post-masonry-content">
+    <span class="blog-post-masonry-content-date">
+      {{ article.published_at | date: format: 'short_month' }}
+    </span>
+
+    <h2 class="blog-post-masonry-title">
+      <a href="{{ article.url }}">
+        {% comment %}ly_code_replace_for_[ article.title ]_begin{% endcomment %}{% include 'ly-title' with article %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}
+      </a>
+    </h2>
+
+    <div class="blog-post-masonry-text rte">
+        {% if article.excerpt != blank %}
+          {% comment %}ly_code_replace_for_[ article.excerpt ]_begin{% endcomment %}{% include 'ly-excerpt' with article %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}
+        {% endif %}
+
+        <p>
+          <a href="{{ article.url }}">
+            {% comment %}ly_i18n_replace_for_[ 'blogs.article_item.read_more' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'blogs.article_item.read_more' | t }}{% endcapture %}{% include 'ly-static-string' with '6185408' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}
+          </a>
+        </p>
+    </div>
+  </div>
+</article>

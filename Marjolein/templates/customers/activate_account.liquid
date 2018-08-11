@@ -1,0 +1,31 @@
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}<h1 class="page-title">{% comment %}ly_i18n_replace_for_[ 'customers.activate_account.header' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'customers.activate_account.header' | t }}{% endcapture %}{% include 'ly-static-string' with '6185720' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</h1>
+
+{% include 'breadcrumbs' %}
+
+<div class="customer-wrapper">
+
+  {% form 'activate_customer_password', class: 'activate-account' %}
+
+    <p>{% comment %}ly_i18n_replace_for_[ 'customers.activate_account.message' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'customers.activate_account.message' | t }}{% endcapture %}{% include 'ly-static-string' with '6185721' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</p>
+
+    {% if form.errors %}
+      <div class="error-message">{{ form.errors | default_errors }}</div>
+    {% endif %}
+
+    <div class="input-wrapper">
+      <label>{% comment %}ly_i18n_replace_for_[ 'general.general.password' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.general.password' | t }}{% endcapture %}{% include 'ly-static-string' with '6185722' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</label>
+      <input type="password" name="customer[password]" />
+    </div>
+
+    <div class="input-wrapper">
+      <label>{% comment %}ly_i18n_replace_for_[ 'general.general.repeat_password' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.general.repeat_password' | t }}{% endcapture %}{% include 'ly-static-string' with '6185723' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</label>
+      <input type="password" name="customer[password_confirmation]" />
+    </div>
+
+    <input type="submit" value="{% comment %}ly_i18n_replace_for_[ 'customers.activate_account.submit' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'customers.activate_account.submit' | t }}{% endcapture %}{% include 'ly-static-string' with '6185724' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}">
+
+    <a class="active-account-decline" href="/account/register">{% comment %}ly_i18n_replace_for_[ 'customers.activate_account.decline_activation' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'customers.activate_account.decline_activation' | t }}{% endcapture %}{% include 'ly-static-string' with '6185725' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</a>
+
+  {% endform %}
+
+</div>

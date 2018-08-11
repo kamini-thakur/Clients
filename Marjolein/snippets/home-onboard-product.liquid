@@ -1,0 +1,13 @@
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}<article class="product-list-item">
+  <figure class="product-list-item-thumbnail">
+    {{ image }}
+  </figure>
+
+  <div class="product-list-item-details">
+    <p class="product-list-item-vendor">{% comment %}ly_i18n_replace_for_[ 'onboarding.home_products.product_vendor' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'onboarding.home_products.product_vendor' | t }}{% endcapture %}{% include 'ly-static-string' with '6184058' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</p>
+    <h2 class="product-list-item-title">{% comment %}ly_i18n_replace_for_[ 'onboarding.home_products.product_title' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'onboarding.home_products.product_title' | t }}{% endcapture %}{% include 'ly-static-string' with '6184059' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</h2>
+    <p class="product-list-item-price">
+      <span class="money">{% comment %}ly_i18n_replace_for_[ 'onboarding.home_products.product_price' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'onboarding.home_products.product_price' | t }}{% endcapture %}{% include 'ly-static-string' with '6184060' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</span>
+    </p>
+  </div>
+</article>

@@ -1,0 +1,10 @@
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}
+{% if settings.alternative-index-layout %}
+
+  {% layout 'alternative' %}
+
+{% else %}
+
+  {{ content_for_index }}
+
+{% endif %}

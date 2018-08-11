@@ -1,0 +1,15 @@
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}<h1 class="page-title">
+  {% comment %}ly_i18n_replace_for_[ 'general.404.header' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.404.header' | t }}{% endcapture %}{% include 'ly-static-string' with '6185568' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}
+</h1>
+
+{% include 'breadcrumbs' %}
+
+<div class="four-oh-four rte">
+  {% capture searchLink %}
+    <a href="/search">{% comment %}ly_i18n_replace_for_[ 'general.404.search_link' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.404.search_link' | t }}{% endcapture %}{% include 'ly-static-string' with '6185569' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</a>
+  {% endcapture %}
+  {% capture collectionLink %}
+    <a href="/collections/all">{% comment %}ly_i18n_replace_for_[ 'general.404.collection_link' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.404.collection_link' | t }}{% endcapture %}{% include 'ly-static-string' with '6185570' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</a>
+  {% endcapture %}
+  <p>{% comment %}ly_i18n_replace_for_[ 'general.404.message_html' | t: search_link: searchLink, collection_link: collectionLink ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.404.message_html' | t: search_link: searchLink, collection_link: collectionLink }}{% endcapture %}{% include 'ly-static-string' with '6185573' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% assign replacement = searchLink %}{% assign ly_template = ly_template | replace: '[[search_link]]', replacement %}{% assign replacement = collectionLink  %}{% assign ly_template = ly_template | replace: '[[collection_link]]', replacement %}{% if escape_content %}{{ ly_template}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</p>
+</div>

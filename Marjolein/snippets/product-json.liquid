@@ -1,0 +1,33 @@
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}{% comment %}
+  @param add_to_cart_text {string}
+    Sets the button text for the Product button
+
+  @param id {number}
+    Sets the ID of the JSON fields for ProduceView to parse
+
+  @param section_onboarding {boolean}
+    Used to prevent onboarding content from activating ProductView
+
+  @param enable_history {boolean}
+    Used to allow deeplinking on product variants
+{% endcomment %}
+
+{% unless id %}
+  {% assign id = product.id %}
+{% endunless %}
+
+<script type="application/json" data-product-settings-{{ id }}>
+  {
+    "addToCartText": {{ add_to_cart_text | json }},
+    "enableHistory": {{ enable_history | json }},
+    "linkedOptions": false,
+    "processingText": {% comment %}ly_i18n_replace_for_[ 'products.product.processing' | t | json ]_begin{% endcomment %}{% capture ly_template %}{{ 'products.product.processing' | t | json }}{% endcapture %}{% include 'ly-static-string' with '6184100' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape | json }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %},
+    "setQuantityText": {{ 'products.product.set_quantity' | t | json }},
+    "soldOutText": {% comment %}ly_i18n_replace_for_[ 'products.product.sold_out' | t | json ]_begin{% endcomment %}{% capture ly_template %}{{ 'products.product.sold_out' | t | json }}{% endcapture %}{% include 'ly-static-string' with '6184101' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape | json }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %},
+    "unavailableText": {% comment %}ly_i18n_replace_for_[ 'products.product.unavailable' | t | json ]_begin{% endcomment %}{% capture ly_template %}{{ 'products.product.unavailable' | t | json }}{% endcapture %}{% include 'ly-static-string' with '6184102' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape | json }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}
+  }
+</script>
+
+{% unless section_onboarding %}
+  <script type="application/json" data-product-json-{{ id }}>{{ product | json }}</script>
+{% endunless %}

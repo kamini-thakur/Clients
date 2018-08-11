@@ -1,0 +1,11 @@
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}<script>
+  var GeolizrAPI = {}
+
+  Geolizr.init(function(jQuery) {
+    Geolizr.getGeoData(function(geoData) {
+      Geolizr.dispatchEvent('geolizr.geoData', geoData);
+    });
+  });
+
+  GeolizrAPI.addEventListener = Geolizr.addEventListener;
+</script>

@@ -1,0 +1,91 @@
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}<script>
+  var Theme = {};
+  Theme.version = "3.0.3";
+
+  Theme.currency = '{{ shop.currency }}';
+  Theme.defaultCurrency = '{{ settings.default_currency }}';
+  Theme.moneyFormat = {{ shop.money_format | strip_html | json }};
+  Theme.moneyFormatCurrency = {{ shop.money_with_currency_format | strip_html | json }};
+
+  Theme.addToCartText = "{% comment %}ly_i18n_replace_for_[ 'products.product.add_to_cart' | t | escape ]_begin{% endcomment %}{% capture ly_template %}{{ 'products.product.add_to_cart' | t | escape }}{% endcapture %}{% include 'ly-static-string' with '6185541' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape | escape }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}";
+  Theme.soldOutText = "{% comment %}ly_i18n_replace_for_[ 'products.product.sold_out' | t | escape ]_begin{% endcomment %}{% capture ly_template %}{{ 'products.product.sold_out' | t | escape }}{% endcapture %}{% include 'ly-static-string' with '6185542' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape | escape }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}";
+  Theme.unavailableText = "{% comment %}ly_i18n_replace_for_['products.product.unavailable' | t | escape ]_begin{% endcomment %}{% capture ly_template %}{{'products.product.unavailable' | t | escape }}{% endcapture %}{% include 'ly-static-string' with '6185543' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape | escape }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}";
+  Theme.processingText = "{% comment %}ly_i18n_replace_for_[ 'products.product.processing' | t | escape ]_begin{% endcomment %}{% capture ly_template %}{{ 'products.product.processing' | t | escape }}{% endcapture %}{% include 'ly-static-string' with '6185544' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape | escape }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}";
+  Theme.pleaseSelectText = "{% comment %}ly_i18n_replace_for_[ 'general.general.please_select' | t | escape ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.general.please_select' | t | escape }}{% endcapture %}{% include 'ly-static-string' with '6185545' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape | escape }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}";
+
+  Theme.addToCartSuccess = "{% comment %}ly_i18n_replace_for_[ 'products.product.success_html' | t: product: '**product**', cart_link: '**cart_link**', continue_link: '**continue_link**', checkout_link: '**checkout_link**' | escape ]_begin{% endcomment %}{% capture ly_template %}{{ 'products.product.success_html' | t: product: '**product**', cart_link: '**cart_link**', continue_link: '**continue_link**', checkout_link: '**checkout_link**' | escape }}{% endcapture %}{% include 'ly-static-string' with '6185550' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% include 'ly-static-string' with '6185546' %}{% if ly_translation %}{% assign replacement = ly_translation %}{% else %}{% assign replacement = '**product**' %}{% endif %}{% assign ly_template = ly_template | replace: '[[product]]', replacement %}{% include 'ly-static-string' with '6185547' %}{% if ly_translation %}{% assign replacement = ly_translation %}{% else %}{% assign replacement = '**cart_link**' %}{% endif %}{% assign ly_template = ly_template | replace: '[[cart_link]]', replacement %}{% include 'ly-static-string' with '6185548' %}{% if ly_translation %}{% assign replacement = ly_translation %}{% else %}{% assign replacement = '**continue_link**' %}{% endif %}{% assign ly_template = ly_template | replace: '[[continue_link]]', replacement %}{% include 'ly-static-string' with '6185549' %}{% if ly_translation %}{% assign replacement = ly_translation %}{% else %}{% assign replacement = '**checkout_link** ' %}{% endif %}{% assign ly_template = ly_template | replace: '[[checkout_link]]', replacement %}{% if escape_content %}{{ ly_template | escape }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}";
+
+  {% if shop.customer_accounts_enabled and customer %}
+    Theme.customerLoggedIn = true;
+  {% endif %}
+
+  Theme.shippingCalculator = true;
+  Theme.shippingButton = "{% comment %}ly_i18n_replace_for_[ 'cart.shipping_calculator.submit' | t | escape ]_begin{% endcomment %}{% capture ly_template %}{{ 'cart.shipping_calculator.submit' | t | escape }}{% endcapture %}{% include 'ly-static-string' with '6185551' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape | escape }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}";
+  Theme.shippingDisabled = "{% comment %}ly_i18n_replace_for_[ 'cart.shipping_calculator.disabled' | t | escape ]_begin{% endcomment %}{% capture ly_template %}{{ 'cart.shipping_calculator.disabled' | t | escape }}{% endcapture %}{% include 'ly-static-string' with '6185552' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape | escape }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}";
+
+  {% if shop.customer_accounts_enabled and customer and customer.default_address %}
+    Theme.customerAddress = {{ customer.default_address | json }};
+  {% endif %}
+
+  Theme.shippingCalcErrorMessage = "{% comment %}ly_i18n_replace_for_[ 'cart.shipping_calculator.error' | t: error_message: '**error_message**' | escape ]_begin{% endcomment %}{% capture ly_template %}{{ 'cart.shipping_calculator.error' | t: error_message: '**error_message**' | escape }}{% endcapture %}{% include 'ly-static-string' with '6185554' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% include 'ly-static-string' with '6185553' %}{% if ly_translation %}{% assign replacement = ly_translation %}{% else %}{% assign replacement = '**error_message** ' %}{% endif %}{% assign ly_template = ly_template | replace: '[[error_message]]', replacement %}{% if escape_content %}{{ ly_template | escape | escape }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}";
+  Theme.shippingCalcMultiRates = "{% comment %}ly_i18n_replace_for_[ 'cart.shipping_calculator.rates_html' | t: address: '**address**', number_of_rates: '**number_of_rates**', rate: '**rate**' | escape ]_begin{% endcomment %}{% capture ly_template %}{{ 'cart.shipping_calculator.rates_html' | t: address: '**address**', number_of_rates: '**number_of_rates**', rate: '**rate**' | escape }}{% endcapture %}{% include 'ly-static-string' with '6185558' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% include 'ly-static-string' with '6185555' %}{% if ly_translation %}{% assign replacement = ly_translation %}{% else %}{% assign replacement = '**address**' %}{% endif %}{% assign ly_template = ly_template | replace: '[[address]]', replacement %}{% include 'ly-static-string' with '6185556' %}{% if ly_translation %}{% assign replacement = ly_translation %}{% else %}{% assign replacement = '**number_of_rates**' %}{% endif %}{% assign ly_template = ly_template | replace: '[[number_of_rates]]', replacement %}{% include 'ly-static-string' with '6185557' %}{% if ly_translation %}{% assign replacement = ly_translation %}{% else %}{% assign replacement = '**rate** ' %}{% endif %}{% assign ly_template = ly_template | replace: '[[rate]]', replacement %}{% if escape_content %}{{ ly_template | escape }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}";
+  Theme.shippingCalcOneRate = "{% comment %}ly_i18n_replace_for_[ 'cart.shipping_calculator.rate' | t: address: '**address**' | escape ]_begin{% endcomment %}{% capture ly_template %}{{ 'cart.shipping_calculator.rate' | t: address: '**address**' | escape }}{% endcapture %}{% include 'ly-static-string' with '6185560' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% include 'ly-static-string' with '6185559' %}{% if ly_translation %}{% assign replacement = ly_translation %}{% else %}{% assign replacement = '**address** ' %}{% endif %}{% assign ly_template = ly_template | replace: '[[address]]', replacement %}{% if escape_content %}{{ ly_template | escape | escape }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}";
+  Theme.shippingCalcNoRates = "{% comment %}ly_i18n_replace_for_[ 'cart.shipping_calculator.no_rates' | t | escape ]_begin{% endcomment %}{% capture ly_template %}{{ 'cart.shipping_calculator.no_rates' | t | escape }}{% endcapture %}{% include 'ly-static-string' with '6185561' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape | escape }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}";
+  Theme.shippingCalcRateValues = "{% comment %}ly_i18n_replace_for_[ 'cart.shipping_calculator.rate_values_html' | t: rate_title: '**rate_title**', rate: '**rate**' | escape ]_begin{% endcomment %}{% capture ly_template %}{{ 'cart.shipping_calculator.rate_values_html' | t: rate_title: '**rate_title**', rate: '**rate**' | escape }}{% endcapture %}{% include 'ly-static-string' with '6185564' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% include 'ly-static-string' with '6185562' %}{% if ly_translation %}{% assign replacement = ly_translation %}{% else %}{% assign replacement = '**rate_title**' %}{% endif %}{% assign ly_template = ly_template | replace: '[[rate_title]]', replacement %}{% include 'ly-static-string' with '6185563' %}{% if ly_translation %}{% assign replacement = ly_translation %}{% else %}{% assign replacement = '**rate** ' %}{% endif %}{% assign ly_template = ly_template | replace: '[[rate]]', replacement %}{% if escape_content %}{{ ly_template | escape }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}";
+
+  {% if settings.currency-switcher %}
+    Theme.currencySwitcher = true;
+    Theme.currencySwitcherFormat = '{{ settings.currency-switcher-format | escape }}';
+    /*
+      Override the default Theme.moneyFormat for recalculating
+      prices on the product and cart templates.
+    */
+    Theme.moneyFormat = {{ shop.[settings.currency-switcher-format] | json }};
+  {% endif %}
+
+  {% if settings.product-zoom %}
+    Theme.imageZoom = true;
+  {% endif %}
+
+  {% if settings.slideshow %}
+    Theme.slideshow = true;
+
+    {% if settings.slideshow-autoplay %}
+      Theme.slideshowAutoplay = true;
+      Theme.slideshowAutoplayDelay = 4;
+        {% if settings.slideshow-autoplay-delay != blank %}
+          Theme.slideshowAutoplayDelay = parseInt('{{ settings.slideshow-autoplay-delay | escape }}',10);
+        {% endif %}
+    {% endif %}
+  {% endif %}
+
+  {% if settings.instagram-widget and settings.instagram-widget-access-token != blank %}
+    Theme.instagram = true;
+    Theme.instagramAccessToken = '{{ settings.instagram-widget-access-token | escape }}';
+    Theme.instagramShowTag = {{ settings.use-instagram-tag | json }};
+    Theme.instagramTag = '{{ settings.instagram-widget-tag | escape }}';
+  {% endif %}
+
+  {% if settings.twitter-widget and settings.twitter-username != blank %}
+    Theme.twitter = true;
+    Theme.twitterId = '{{ settings.twitter-username | escape }}';
+    Theme.twitterShowRetweets = {{ settings.twitter-widget-retweets | json }};
+  {% endif %}
+
+  Theme.itemRemovedFromCart = "{% comment %}ly_i18n_replace_for_[ 'cart.general.item_removed_message' | t | escape ]_begin{% endcomment %}{% capture ly_template %}{{ 'cart.general.item_removed_message' | t | escape }}{% endcapture %}{% include 'ly-static-string' with '6185565' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape | escape }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}";
+  Theme.itemRemovedFromCartUndo = "{% comment %}ly_i18n_replace_for_[ 'cart.general.undo' | t | escape ]_begin{% endcomment %}{% capture ly_template %}{{ 'cart.general.undo' | t | escape }}{% endcapture %}{% include 'ly-static-string' with '6185566' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape | escape }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}";
+
+  {% if settings.sticky-header %}
+    Theme.stickyHeader = true;
+  {% endif %}
+
+  Theme.cartText = "{% comment %}ly_i18n_replace_for_[ 'layout.header.cart' | t | escape ]_begin{% endcomment %}{% capture ly_template %}{{ 'layout.header.cart' | t | escape }}{% endcapture %}{% include 'ly-static-string' with '6185567' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape | escape }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}";
+  Theme.itemRemovedFromCart = "{% comment %}ly_i18n_replace_for_[ 'cart.general.item_removed_message' | t | escape ]_begin{% endcomment %}{% capture ly_template %}{{ 'cart.general.item_removed_message' | t | escape }}{% endcapture %}{% include 'ly-static-string' with '6185565' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape | escape }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}";
+
+  Theme.quickShop = {% if settings.product-hover == "quick-shop" %}true{% else %}false{% endif %};
+  Theme.relatedProducts = {{ settings.related-products | json }};
+  Theme.featuredProducts = {{ settings.featured-products | json }};
+
+  // For selecting the first available variant
+  var FirstVariant = {};
+</script>

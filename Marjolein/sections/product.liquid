@@ -1,0 +1,366 @@
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}
+{% include 'breadcrumbs' %}
+
+{% assign product_id = product.id %}
+{% assign variant = product.selected_or_first_available_variant %}
+
+{% assign use_zoom = false %}
+{% if section.settings.zoom %}
+  {% assign use_zoom = true %}
+{% endif %}
+
+{% assign use_slideshow = false %}
+{% if section.settings.images-layout == 'slideshow' %}
+  {% assign use_slideshow = true %}
+{% endif %}
+
+{% assign use_masonry = false %}
+{% if section.settings.page-layout == 'masonry' %}
+  {% assign use_masonry = true %}
+  {% assign use_slideshow = false %}
+{% endif %}
+
+
+{% assign related_products_position = section.settings.related-products-position %}
+{% if use_masonry %}
+  {% comment %}Related products in masonry grid must be below product{% endcomment %}
+  {% assign related_products_position = 'below' %}
+{% endif %}
+
+{% if collection == null or collection.handle == 'frontpage' or collection.handle == 'all' %}
+  {% assign found_a_collection = false %}
+  {% for c in product.collections %}
+    {% if found_a_collection == false and c.handle != 'frontpage' and c.handle != 'all' %}
+      {% assign found_a_collection = true %}
+      {% assign collection = c %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+<section
+  class="main-product-wrap
+    product-wrap
+    {% if section.settings.related-products %}related-products-position-{{ related_products_position }}{% endif %}"
+  itemscope
+  itemtype="http://schema.org/Product"
+  data-product-id="{{ product_id }}"
+  {% unless use_slideshow %}data-images-list-view{% endunless %}
+  {% if section.settings.zoom %}data-zoom{% endif %}
+  {% if section.settings.linked-options %}data-linked-options{% endif %}
+  {% if section.settings.ajax %}data-ajax{% endif %}
+  {% if use_masonry %}data-product-masonry{% endif %}
+  data-section-id="{{ section.id }}"
+  data-section-type="product">
+
+  <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+  <meta itemprop="image" content="{{ product | img_url: 'grande' }}">
+
+  <div
+    class="product-images {% if use_masonry %}product-images-masonry{% endif %}"
+    {% if use_masonry and product.images.size > 1 %}data-masonry-gallery{% endif %}
+  >
+    {% if use_masonry and product.images.size > 1 %}
+      <div class="product-image-masonry-sizer" data-masonry-image-sizer></div>
+    {% endif %}
+
+    {% if use_slideshow %}
+
+      <div class="product-main-image">
+        {% assign main_image = variant.image | default: product.featured_image %}
+        {% assign main_image_alt = product.title %}
+        {% if main_image.alt != blank %}
+          {% assign main_image_alt = main_image.alt %}
+        {% endif %}
+
+        {% if main_image != blank %}
+          <img class="cbb-loupe"
+            src="{{ main_image | img_url: '1024x1024' }}"
+            alt="{{ main_image_alt | escape }}"
+           >
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+
+        {% if section.settings.zoom %}
+          <div class="product-zoom"></div>
+        {% endif %}
+      </div>
+    
+      {% if product.images.size > 1 %}
+        <div class="product-thumbnails-outer-wrapper">
+          {% if product.images.size > 4 %}
+            <span class="product-thumbnails-navigation-previous">&#xe601;</span>
+          {% endif %}
+          <div class="product-thumbnails-wrapper">
+            <div class="product-thumbnails {% if product.images.size > 4 %}has-side-scroll{% endif %}">
+              {% for image in product.images %}
+                <div class="product-thumbnail {% if mainImage == image %}active{% endif %}">
+                  <img
+                    alt="{{ image.alt | escape }}"
+                    data-high-res="{{ image | img_url: '1024x1024' }}"
+                    src="{{ image | img_url: 'compact' }}"
+                    data-image-id="{{ image.id }}"
+                  >
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          {% if product.images.size > 4 %}
+            <span class="product-thumbnails-navigation-next">&#xe600;</span>
+          {% endif %}
+        </div>
+      {% endif %}
+
+    {% else %}
+
+
+      {%- for image in product.images -%}
+        {% assign use_large_image = false %}
+        {% if product.images.size == 2 %}
+          {% assign use_large_image = true %}
+        {% elsif forloop.first and use_masonry %}
+          {% assign use_large_image = true %}
+        {% endif %}
+
+        {% assign image_alt = product.title %}
+        {% if image.alt != blank %}
+          {% assign image_alt = image.alt %}
+        {% endif %}
+
+        <div class="product-image {% if use_large_image %}product-image-wide{% endif %}">
+          <img
+            src="{{ image | img_url: '1024x1024' }}"
+            alt="{{ image_alt | escape }}"
+            data-image-id="{{ image.id }}"
+          >
+        </div>
+      {%- endfor -%}
+
+    {% endif %}
+  </div>
+
+  <div class="product-details-wrapper">
+    <div class="product-details">
+
+      {% if section.settings.vendor %}
+        <a class="product-vendor" href="{% comment %}ly_code_replace_for_[ product.vendor | url_for_vendor ]_begin{% endcomment %}{% include 'ly-vendor' with product %}{{ ly_translation | url_for_vendor }}{% comment %}ly_code_replace_end{% endcomment %}">{% comment %}ly_code_replace_for_[ product.vendor ]_begin{% endcomment %}{% include 'ly-vendor' with product %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</a>
+      {% endif %}
+      <h1 class="product-title" itemprop="name">{% comment %}ly_code_replace_for_[ product.title ]_begin{% endcomment %}{% include 'ly-title' with product %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</h1>
+      
+      <div class='jdgm-widget jdgm-preview-badge' data-id='{{ product.id }}'>{{ product.metafields.judgeme.badge }}</div>
+      
+      <p class="product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+
+        <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+        <meta itemprop="price" content="{{ product.price_min | money_without_currency }}">
+		{% if variant.price > 0 %}
+        <span class="product-price-minimum money">
+          {{ variant.price | money }}
+        </span>
+        {% endif %}
+
+        <span
+          class="product-price-compare money original {% if variant.compare_at_price > variant.price %}visible{% endif %}"
+        >
+          {{ variant.compare_at_price | money }}
+        </span>
+
+        {% if product.available %}
+          <link itemprop="availability" href="http://schema.org/InStock">
+        {% else %}
+          <link itemprop="availability" href="http://schema.org/OutOfStock">
+        {% endif %}
+
+      </p>
+
+      <form class="product-form"
+        id="product-form-{{ product_id }}"
+        action="/cart/add"
+        method="post"
+        data-product-form="{{ product_id }}"
+      >
+        {% if product.variants.size > 1 %}
+         <div class="product-options">
+            {%-
+              include 'product-options-dropdown',
+              form_id: product_id
+            -%}
+
+            <div class="selector-wrapper no-js-required">
+              <label for="product-select-{{ product_id }}"></label>
+              <select
+                class="product-select"
+                name="id"
+                id="product-select-{{ product_id }}"
+                data-select-ignore
+              >
+                {% for variant in product.variants %}
+                  {% if variant.available %}
+                    <option
+                      {% if variant == selected_variant %}selected="selected"{% endif %}
+                      value="{{ variant.id }}" data-variant-id="{{ variant.id }}" data-sku="{{ variant.sku }}">
+                      {% comment %}ly_code_replace_for_[ variant.title ]_begin{% endcomment %}{% include 'ly-title' with variant %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %} - {{ variant.price | money }}
+                    </option>
+                  {% else %}
+                    <option data-variant-id="{{ variant.id }}" value="{{ variant.id }}">
+                      {% comment %}ly_code_replace_for_[ variant.title ]_begin{% endcomment %}{% include 'ly-title' with variant %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %} - {% comment %}ly_i18n_replace_for_[ 'products.product.sold_out' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'products.product.sold_out' | t }}{% endcapture %}{% include 'ly-static-string' with '6184026' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}
+                    </option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        {% else %}
+          <input
+            class="product-select"
+            name="id"
+            value="{{ product.variants[0].id }}"
+            type="hidden"
+            data-variant-title="{% comment %}ly_code_replace_for_[ product.variants[0].title ]_begin{% endcomment %}{% include 'ly-title' with product.variants[0] %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}" />
+        {% endif %}
+
+        {% if product.available %}
+
+          <div id="infiniteoptions-container"></div>
+          <div id="uploadery-container"></div>
+
+          <div class="product-quantity inline-input-wrapper">
+            <label>{% comment %}ly_i18n_replace_for_[ 'general.general.quantity' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.general.quantity' | t }}{% endcapture %}{% include 'ly-static-string' with '6184027' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</label>
+            <input type="text" name="quantity" value="1" />
+          </div>
+        {% endif %}
+
+        {% if section.settings.share-buttons %}
+          {% include 'share-buttons' %}
+        {% endif %}
+
+        <div class="add-to-cart">
+          {% if variant.available %}
+            <input type="submit" value="{% comment %}ly_i18n_replace_for_[ 'products.product.add_to_cart' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'products.product.add_to_cart' | t }}{% endcapture %}{% include 'ly-static-string' with '6184028' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}" />
+          {% else %}
+            <input type="submit" class="disabled" disabled="disabled" value="{% comment %}ly_i18n_replace_for_[ 'products.product.sold_out' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'products.product.sold_out' | t }}{% endcapture %}{% include 'ly-static-string' with '6184026' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}" />
+          {% endif %}
+        </div>
+
+        <div class="product-message"></div>
+
+      </form>
+{% include 'iStock-notify-me' %}
+      {% if product.description != blank %}
+        <div class="product-description rte" itemprop="description">
+          {% comment %}ly_code_replace_for_[ product.description ]_begin{% endcomment %}{% include 'ly-description' with product %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+  {% assign addToCartText = 'products.product.add_to_cart' | t %}
+
+  {%
+    include 'product-json',
+    id: product_id,
+    add_to_cart_text: addToCartText,
+    enable_history: true
+  %}
+</section>
+
+      <div style='margin-top:60px;'  id='judgeme_product_reviews' class='jdgm-widget jdgm-review-widget' data-product-title='{{ product.title }}' data-id='{{ product.id }}'>{{ product.metafields.judgeme.widget }}</div>
+
+{% if section.settings.related-products %}
+  {%
+    include 'related-products'
+    related_products_position: related_products_position,
+    related_collection: collection,
+    current_product_id: product_id,
+    use_masonry: use_masonry
+  %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Product pages",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "vendor",
+      "label": "Show vendor name"
+    },
+    {
+      "type": "select",
+      "id": "page-layout",
+      "label": "Page layout",
+      "options": [
+        {
+          "value": "default",
+          "label": "Grid (Default)"
+        },
+        {
+          "value": "masonry",
+          "label": "Masonry"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "images-layout",
+      "label": "Images layout",
+      "info": "This only applies to grid layout",
+      "options": [
+        {
+          "value": "slideshow",
+          "label": "Slideshow"
+        },
+        {
+          "value": "list-view",
+          "label": "List view"
+        }
+      ],
+      "default": "slideshow"
+    },
+    {
+      "type": "checkbox",
+      "id": "zoom",
+      "label": "Enable image zoom",
+      "info": "The image zoom functionality only works with the slideshow layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "related-products",
+      "label": "Show related products"
+    },
+    {
+      "type": "select",
+      "id": "related-products-position",
+      "label": "Align related products",
+      "info": "This only applies to grid layout",
+      "options": [
+        {
+          "value": "below",
+          "label": "Below product info"
+        },
+        {
+          "value": "right",
+          "label": "Right of product info"
+        }
+      ],
+      "default": "below"
+    },
+    {
+      "type": "checkbox",
+      "id": "ajax",
+      "label": "Add product to cart without leaving product page"
+    },
+    {
+      "type": "header",
+      "content": "Show sharing icons"
+    },
+    {
+      "type": "checkbox",
+      "id": "share-buttons",
+      "label": "Show share icons"
+    }
+  ]
+}
+{% endschema %}

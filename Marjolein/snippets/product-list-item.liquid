@@ -1,0 +1,155 @@
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}
+{% comment %}
+  @param product_hover
+         Uses a string to determine the product hover functionality
+         Defaults to: 'image-flip'
+
+  @param product_stock_level_threshold
+         An integer representing the stock level in which the stock
+         level overlay appears (when product_hover is 'stock-level')
+         Defaults to: 1
+
+  @param product_badges
+         If true, the product will use stock level badges
+         Defaults to: false
+
+  @param product_icons
+         If true, the product will use icons instead of text
+         Defaults to: false
+
+  @param product_vendor
+         If true, shows the product vendor
+         Defaults to: true
+{% endcomment %}
+
+{%- if product_hover == blank -%}
+  {%- assign product_hover = 'image-flip' -%}
+{%- endif -%}
+
+{%- if product_stock_level_threshold == blank -%}
+  {%- assign product_stock_level_threshold = 1 -%}
+{%- endif -%}
+
+{%- if product_badges == blank -%}
+  {%- assign product_badges = false -%}
+{%- endif -%}
+
+{%- if product_icons == blank -%}
+  {%- assign product_icons = false -%}
+{%- endif -%}
+
+{%- if product_vendor == blank -%}
+  {%- assign product_vendor = true -%}
+{%- endif -%}
+
+{% assign item = product %}
+{% if template contains 'search' %}
+  {% assign item = item %}
+{% elsif template contains 'product' %}
+  {% assign item = prod %}
+{% endif %}
+
+{% if product_hover == 'stock-level' and item.available %}
+  {% assign total = 0 %}
+  {% assign threshold = product_stock_level_threshold | times: 1 %}
+  {% assign infinity = false %}
+  {% for variant in item.variants %}
+    {% if variant.inventory_management == null %}
+      {% assign infinity = true %}
+    {% elsif variant.inventory_management == '' %}
+      {% assign infinity = true %}
+    {% elsif variant.inventory_management == 'shopify' and variant.inventory_policy == 'continue' %}
+      {% assign infinity = true %}
+    {% elsif infinity == false %}
+      {% capture temp %}{{ total | plus: variant.inventory_quantity }}{% endcapture %}
+      {% assign total = temp | times: 1 %}
+    {% endif %}
+  {% endfor %}
+  {% assign stockText = 'products.product.stock_indicator_message' | t: num: total %}
+{% endif %}
+
+<article class="product-list-item{% if product_hover == 'quick-shop' %} has-quick-shop{% endif %}" id="product-list-item-{{ item.id }}" data-product-id="{{ item.id }}">
+
+  {% assign secondaryImage = false %}
+  {% if item.images.size > 1 and product_hover == 'image-flip' %}
+    {% assign secondaryImage = true %}
+  {% endif %}
+
+  <figure class="product-list-item-thumbnail {% if secondaryImage %}has-secondary-image{% endif %}" data-url="{{ item.url | within: collection }}" style="{% if secondaryImage %}background-image:url({{ item.images[1] | img_url: 'grande' }}){% endif %}">
+    <a href="{{ item.url | within: collection }}">
+      {% if item.featured_image %}
+        <img src="{{ item | img_url: 'grande' }}" alt="{{ item.featured_image.alt | escape }}" />
+      {% else %}
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {% endif %}
+    </a>
+
+    {% if product_hover == 'quick-shop' %}
+
+      <script type="application/json" data-product-json>
+        {{ item | json }}
+      </script>
+
+      <script type="application/json" data-product-settings-json>
+        {
+          "addToCartText": {% comment %}ly_i18n_replace_for_[ 'products.product.add_to_cart' | t | json ]_begin{% endcomment %}{% capture ly_template %}{{ 'products.product.add_to_cart' | t | json }}{% endcapture %}{% include 'ly-static-string' with '6184105' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape | json }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %},
+          "enableHistory": {{ enable_history | json }},
+          "imageZoom": false,
+          "linkedOptions": false,
+          "processingText": {% comment %}ly_i18n_replace_for_[ 'products.product.processing' | t | json ]_begin{% endcomment %}{% capture ly_template %}{{ 'products.product.processing' | t | json }}{% endcapture %}{% include 'ly-static-string' with '6184106' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape | json }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %},
+          "ajaxAddProduct": true,
+          "setQuantityText": {{ 'products.product.set_quantity' | t | json }},
+          "soldOutText": {% comment %}ly_i18n_replace_for_[ 'products.product.sold_out' | t | json ]_begin{% endcomment %}{% capture ly_template %}{{ 'products.product.sold_out' | t | json }}{% endcapture %}{% include 'ly-static-string' with '6184107' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape | json }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %},
+          "unavailableText": {% comment %}ly_i18n_replace_for_[ 'products.product.unavailable' | t | json ]_begin{% endcomment %}{% capture ly_template %}{{ 'products.product.unavailable' | t | json }}{% endcapture %}{% include 'ly-static-string' with '6184108' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape | json }}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}
+        }
+      </script>
+
+      <span class="quick-shop-modal-trigger" data-product-handle="{{ item.handle }}" data-product-id="{{ item.id }}" data-variant-id="{{ item.selected_or_first_available_variant.id }}" data-vendor-url="{% comment %}ly_code_replace_for_[ item.vendor | url_for_vendor ]_begin{% endcomment %}{% include 'ly-vendor' with item %}{{ ly_translation | url_for_vendor }}{% comment %}ly_code_replace_end{% endcomment %}">{% comment %}ly_i18n_replace_for_[ 'products.product.quick_shop_trigger_text' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'products.product.quick_shop_trigger_text' | t }}{% endcapture %}{% include 'ly-static-string' with '6184109' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</span>
+    {% elsif product_hover == 'stock-level' %}
+
+      {% if item.available and infinity == false and total <= threshold %}
+        <a class="product-list-item-inventory" href="{{ item.url }}">{{ stockText }}</a>
+      {% endif %}
+
+    {% endif %}
+
+    {% if product_badges %}
+      {% if item.available != true %}
+        <span class="product-list-item-unavailable{% if product_icons %} product-icons{% endif %}" data-title="{% comment %}ly_i18n_replace_for_[ 'products.product.sold_out' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'products.product.sold_out' | t }}{% endcapture %}{% include 'ly-static-string' with '6184110' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}"></span>
+      {% elsif item.compare_at_price_min > item.price_min %}
+        <span class="product-list-item-on-sale{% if product_icons %} product-icons{% endif %}" data-title="{% comment %}ly_i18n_replace_for_[ 'products.product.on_sale' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'products.product.on_sale' | t }}{% endcapture %}{% include 'ly-static-string' with '6184111' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}"></span>
+      {% endif %}
+    {% endif %}
+  </figure>
+
+  <div class="product-list-item-details">
+    {% if product_vendor %}
+      <p class="product-list-item-vendor">{{ item.vendor | link_to_vendor }}</p>
+    {% endif %}
+    <h2 class="product-list-item-title"><a href="{{ item.url | within: collection }}">{% comment %}ly_code_replace_for_[ item.title ]_begin{% endcomment %}{% include 'ly-title' with item %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</a></h2>
+    
+    <div style='margin-top:-7px;' class='jdgm-widget jdgm-preview-badge' data-id='{{ item.id }}'>{{ item.metafields.judgeme.badge }}</div>
+    
+    <p class="product-list-item-price">
+      {% if item.price_varies %}
+        {% if item.price_varies %}{% comment %}ly_i18n_replace_for_[ 'products.product.from' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'products.product.from' | t }}{% endcapture %}{% include 'ly-static-string' with '6184112' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}{% endif %}
+        {% if item.compare_at_price_min > item.price_min %}
+          <span class="money">{{ item.price_min | money }}</span>
+          <span class="original money">{{ item.compare_at_price_min | money }}</span>
+        {% else %}
+          <span class="money">{{ item.price_min | money }}</span>
+        {% endif %}
+      {% else %}
+        {% if item.compare_at_price_min > item.price_min %}
+          <span class="money">{{ item.price_min | money }}</span>
+          <span class="original money">{{ item.compare_at_price_min | money }}</span>
+        {% else %}
+      		{% if item.price_min > 0 %}
+          <span class="money">{{ item.price_min | money }}</span>
+      		{% endif %}
+        {% endif %}
+      {% endif %}
+    </p>
+  </div>
+
+</article>

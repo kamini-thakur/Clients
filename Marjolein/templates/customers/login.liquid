@@ -1,0 +1,75 @@
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}<h1 class="page-title">{% comment %}ly_i18n_replace_for_[ 'customers.login.header' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'customers.login.header' | t }}{% endcapture %}{% include 'ly-static-string' with '6185748' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</h1>
+
+{% include 'breadcrumbs' %}
+
+<div class="customer-wrapper">
+
+  <p class="successful-reset">{% comment %}ly_i18n_replace_for_[ 'customers.login.message' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'customers.login.message' | t }}{% endcapture %}{% include 'ly-static-string' with '6185749' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</p>
+
+  <div class="customer-login">
+    {% form 'customer_login' %}
+
+      {% if form.errors %}
+        <p class="error-message banner">{% comment %}ly_i18n_replace_for_[ 'customers.login.error' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'customers.login.error' | t }}{% endcapture %}{% include 'ly-static-string' with '6185750' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</p>
+      {% endif %}
+
+      <div class="input-wrapper">
+        <label>{% comment %}ly_i18n_replace_for_[ 'general.general.email' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.general.email' | t }}{% endcapture %}{% include 'ly-static-string' with '6185751' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</label>
+        <input type="text" placeholder="{% comment %}ly_i18n_replace_for_[ 'general.general.email_placeholder' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.general.email_placeholder' | t }}{% endcapture %}{% include 'ly-static-string' with '6185752' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}" value="{{ form.email }}" name="customer[email]">
+      </div>
+
+      <div class="input-wrapper">
+        <label>{% comment %}ly_i18n_replace_for_[ 'general.general.password' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.general.password' | t }}{% endcapture %}{% include 'ly-static-string' with '6185753' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</label>
+        <input type="password" placeholder="{% comment %}ly_i18n_replace_for_[ 'general.general.password' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.general.password' | t }}{% endcapture %}{% include 'ly-static-string' with '6185753' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}" name="customer[password]">
+      </div>
+
+      <div class="input-wrapper">
+        <input type="submit" value="{% comment %}ly_i18n_replace_for_[ 'customers.login.submit' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'customers.login.submit' | t }}{% endcapture %}{% include 'ly-static-string' with '6185754' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}">
+        <span class="toggle-forgetfulness">{% comment %}ly_i18n_replace_for_[ 'customers.login.forgot_your_password' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'customers.login.forgot_your_password' | t }}{% endcapture %}{% include 'ly-static-string' with '6185755' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</span>
+      </div>
+
+    {% endform %}
+  </div>
+
+  <div class="recover-password">
+    {% form 'recover_customer_password' %}
+
+      <p>{% comment %}ly_i18n_replace_for_[ 'customers.login.recover_password_message' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'customers.login.recover_password_message' | t }}{% endcapture %}{% include 'ly-static-string' with '6185756' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</p>
+
+      {% if form.posted_successfully? %}
+        <span class="reset-check" data-successful-reset="true"></span>
+      {% endif %}
+
+      <div class="input-wrapper">
+        <label>{% comment %}ly_i18n_replace_for_[ 'general.general.email' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.general.email' | t }}{% endcapture %}{% include 'ly-static-string' with '6185751' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</label>
+        <input type="text" placeholder="{% comment %}ly_i18n_replace_for_[ 'general.general.email_placeholder' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.general.email_placeholder' | t }}{% endcapture %}{% include 'ly-static-string' with '6185752' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}" value="{{ form.email }}" name="email" class="{% if form.errors %}error{% endif %}">
+
+        {% if form.errors %}
+          <p class="error-message">{{ form.errors.messages['form'] }}</p>
+        {% endif %}
+      </div>
+
+      <div class="input-wrapper">
+        <input type="submit" value="{% comment %}ly_i18n_replace_for_[ 'customers.reset_password.submit' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'customers.reset_password.submit' | t }}{% endcapture %}{% include 'ly-static-string' with '6185757' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}">
+        <span class="toggle-forgetfulness">{% comment %}ly_i18n_replace_for_[ 'general.general.cancel' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.general.cancel' | t }}{% endcapture %}{% include 'ly-static-string' with '6185758' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</span>
+      </div>
+
+    {% endform %}
+  </div>
+
+  {% if shop.checkout.guest_login %}
+    <div class="guest-checkout">
+      {% form 'guest_login' %}
+        <p>{% comment %}ly_i18n_replace_for_[ 'customers.guest_checkout.message' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'customers.guest_checkout.message' | t }}{% endcapture %}{% include 'ly-static-string' with '6185759' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</p>
+        <input type="submit" value="{% comment %}ly_i18n_replace_for_[ 'customers.guest_checkout.submit' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'customers.guest_checkout.submit' | t }}{% endcapture %}{% include 'ly-static-string' with '6185760' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}" />
+      {% endform %}
+    </div>
+  {% else %}
+    <div class="new-customer">
+      <h3 class="section-title">{% comment %}ly_i18n_replace_for_[ 'customers.new_customer.header' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'customers.new_customer.header' | t }}{% endcapture %}{% include 'ly-static-string' with '6185761' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</h3>
+      <p>{% comment %}ly_i18n_replace_for_[ 'customers.new_customer.message' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'customers.new_customer.message' | t }}{% endcapture %}{% include 'ly-static-string' with '6185762' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</p>
+      <a class="button secondary" href="/account/register">{% comment %}ly_i18n_replace_for_[ 'customers.register.submit' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'customers.register.submit' | t }}{% endcapture %}{% include 'ly-static-string' with '6185763' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</a>
+    </div>
+  {% endif %}
+
+</div>

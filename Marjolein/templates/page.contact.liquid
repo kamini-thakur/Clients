@@ -1,0 +1,38 @@
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}<h1 class="page-title">{% comment %}ly_code_replace_for_[ page.title ]_begin{% endcomment %}{% include 'ly-title' with page %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</h1>
+
+{% include 'breadcrumbs' %}
+
+<div class="page-content rte">
+  {% comment %}ly_code_replace_for_[ page.content ]_begin{% endcomment %}{% include 'ly-content' with page %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}
+
+  {% form 'contact' %}
+
+    {% if form.errors %}
+      <div class="error-message"><span>{% comment %}ly_i18n_replace_for_[ 'general.contact.error' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.contact.error' | t }}{% endcapture %}{% include 'ly-static-string' with '6185869' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</span></div>
+    {% endif %}
+
+    {% if form.posted_successfully? %}
+      <div class="success-message">{% comment %}ly_i18n_replace_for_[ 'general.contact.success' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.contact.success' | t }}{% endcapture %}{% include 'ly-static-string' with '6185870' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</div>
+    {% else %}
+      <div class="field-wrap name">
+        <label>{% comment %}ly_i18n_replace_for_[ 'general.general.name' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.general.name' | t }}{% endcapture %}{% include 'ly-static-string' with '6185871' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</label>
+        <input type="text" placeholder="{% comment %}ly_i18n_replace_for_[ 'general.general.name_placeholder' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.general.name_placeholder' | t }}{% endcapture %}{% include 'ly-static-string' with '6185872' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}" value="" name="contact[name]" class="{% if form.errors contains "author" %}error{% endif %}">
+      </div>
+
+      <div class="field-wrap email">
+        <label>{% comment %}ly_i18n_replace_for_[ 'general.general.email' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.general.email' | t }}{% endcapture %}{% include 'ly-static-string' with '6185873' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</label>
+        <input type="text" placeholder="{% comment %}ly_i18n_replace_for_[ 'general.general.email_placeholder' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.general.email_placeholder' | t }}{% endcapture %}{% include 'ly-static-string' with '6185874' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}" value="" name="contact[email]" class="{% if form.errors contains "email" %}error{% endif %}">
+      </div>
+
+      <div class="field-wrap message">
+        <label>{% comment %}ly_i18n_replace_for_[ 'general.general.message' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.general.message' | t }}{% endcapture %}{% include 'ly-static-string' with '6185875' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</label>
+        <textarea name="contact[body]" class="{% if form.errors contains "body" %}error{% endif %}"></textarea>
+      </div>
+
+      <input type="hidden" class="comment-check" value="" />
+      <input type="submit" value="{% comment %}ly_i18n_replace_for_[ 'general.contact.submit' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.contact.submit' | t }}{% endcapture %}{% include 'ly-static-string' with '6185876' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}">
+    {% endif %}
+
+  {% endform %}
+
+</div>

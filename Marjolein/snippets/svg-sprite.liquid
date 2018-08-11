@@ -1,0 +1,9 @@
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}{%- capture svg_sprite -%}
+  <div class="svg-sprite" style="width:0; height:0; visibility:hidden; position: absolute;">
+    <svg xmlns="http://www.w3.org/2000/svg">
+      
+      
+    </svg>
+  </div>
+{%- endcapture -%}
+{{ svg_sprite | strip_newlines }}

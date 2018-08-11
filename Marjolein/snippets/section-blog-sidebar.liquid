@@ -1,0 +1,38 @@
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}
+<aside class="blog-sidebar">
+
+  <div class="blog-recent-posts">
+    <h3 class="section-title">{% comment %}ly_i18n_replace_for_[ 'blogs.blog.recent_posts' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'blogs.blog.recent_posts' | t }}{% endcapture %}{% include 'ly-static-string' with '6185429' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</h3>
+
+    {% for article in blogs[blog.handle].articles limit: 3 %}
+      <article class="blog-recent-post">
+        <h4 class="blog-recent-post-title">{% comment %}ly_code_replace_for_[ article.title | link_to: article.url ]_begin{% endcomment %}{% include 'ly-title' with article %}{{ ly_translation | link_to: article.url }}{% comment %}ly_code_replace_end{% endcomment %}</h4>
+        <span class="blog-recent-post-date">{{ article.published_at | date: format: 'long_month' | link_to: article.url }}</span>
+      </article>
+    {% endfor %}
+  </div>
+
+  {% if section.settings.tag-filter and blog.tags.size > 0 %}
+    <div class="blog-tag-filter">
+      <h3 class="blog-tag-filter-title section-title">{% comment %}ly_i18n_replace_for_[ 'blogs.blog.sort_by_tag' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'blogs.blog.sort_by_tag' | t }}{% endcapture %}{% include 'ly-static-string' with '6185430' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</h3>
+
+      <div class="select-wrapper">
+        <span class="selected-text"></span>
+        <select data-url="{{ blog.handle }}">
+          <option value="all">{% comment %}ly_i18n_replace_for_[ 'blogs.blog.all_tags' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'blogs.blog.all_tags' | t }}{% endcapture %}{% include 'ly-static-string' with '6185431' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</option>
+          {% for tag in blogs[blog.handle].tags %}
+            {% if current_tags contains tag %}
+              <option value="{{ tag | handle }}" selected="selected">{{ tag }}</option>
+            {% else %}
+              <option value="{{ tag | handle }}">{{ tag }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if section.settings.rss-icon %}
+    <a class="blog-subscribe" href="{{ blog.url }}.atom">{% comment %}ly_i18n_replace_for_[ 'blogs.blog.subscribe' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'blogs.blog.subscribe' | t }}{% endcapture %}{% include 'ly-static-string' with '6185432' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</a>
+  {% endif %}
+</aside>

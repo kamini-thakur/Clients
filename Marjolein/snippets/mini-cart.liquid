@@ -1,0 +1,49 @@
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}<div class="mini-cart {% if cart.item_count == 0 %}empty{% endif %}">
+  <div class="arrow"></div>
+
+  <div class="mini-cart-item-wrapper">
+    {% for item in cart.items %}
+      <article class="mini-cart-item" data-variant="{{ item.variant.id }}" data-url="{{ item.url }}" data-title="{% comment %}ly_code_replace_for_[ item.product.title ]_begin{% endcomment %}{% include 'ly-title' with item.product %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}">
+
+        <figure class="mini-cart-item-image">
+          <a href="{{ item.url }}">
+            <img alt="{{ item.image.alt | escape }}" src="{{ item | img_url: 'small' }}">
+          </a>
+        </figure>
+
+        <div class="mini-cart-item-details">
+          <p class="mini-cart-item-quantity">{% comment %}ly_i18n_replace_for_[ 'layout.mini_cart.quantity' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'layout.mini_cart.quantity' | t }}{% endcapture %}{% include 'ly-static-string' with '6184077' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}: <span>{{ item.quantity }}</span></p>
+          <p class="mini-cart-item-title">
+            <a href="{{ item.url }}">
+              {% comment %}ly_code_replace_for_[ item.product.title ]_begin{% endcomment %}{% include 'ly-title' with item.product %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %} {% unless item.variant.title == 'Default Title' %}({% comment %}ly_code_replace_for_[ item.variant.title ]_begin{% endcomment %}{% include 'ly-title' with item.variant %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}){% endunless %}
+            </a>
+          </p>
+
+          {% if item.properties %}
+            {% for property in item.properties %}
+              {% unless property.last == blank %}
+                <p class="mini-cart-item-property">
+                  <span class="property-label">{{ property.first }}:</span>
+                  {% if property.last contains '/uploads/' %}
+                    <a class="property-image" href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
+                  {% else %}
+                    <span class="property-value">{{ property.last }}</span>
+                  {% endif %}
+                </p>
+              {% endunless %}
+            {% endfor %}
+          {% endif %}
+
+          <p class="mini-cart-item-price"><span class="money">{{ item.price | money }}</span></p>
+        </div>
+
+      </article>
+    {% endfor %}
+  </div>
+
+  <div class="mini-cart-footer">
+    <a class="button secondary" href="/cart">{% comment %}ly_i18n_replace_for_[ 'layout.mini_cart.view_cart' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'layout.mini_cart.view_cart' | t }}{% endcapture %}{% include 'ly-static-string' with '6184078' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</a>
+    <a class="button" href="/checkout{% comment %}ly_checkout_begin{% endcomment %}{% assign language = cart.attributes["language"] %}{% if language == nil %}{% assign language = shop.metafields["languages"]["default"] %}{% endif %}{% assign checkout_code = shop.metafields.language_codes[language] %}{% if checkout_code %}{% assign checkout_code = '?locale=' | append: checkout_code %}{{ checkout_code }}{% endif %}{% comment %}ly_checkout_end{% endcomment %}">{% comment %}ly_i18n_replace_for_[ 'layout.mini_cart.checkout' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'layout.mini_cart.checkout' | t }}{% endcapture %}{% include 'ly-static-string' with '6184079' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</a>
+  </div>
+
+</div>

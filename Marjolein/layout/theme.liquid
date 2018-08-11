@@ -1,0 +1,112 @@
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}
+{% comment %}ly_static_code_begin{% endcomment %}{% capture ly_content %}{% comment %}ly_static_code_end{% endcomment %}<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en"{% comment %}ly_dir_replace_for_[]_begin{% endcomment %}{% assign language = cart.attributes["language"] %}{% if language == nil %}{% assign language = shop.metafields["languages"]["default"] %}{% endif %}{% if shop.metafields.languages_dir[language] == 'rtl' %} dir="rtl" {% endif %}{% comment %}ly_dir_replace_end{% endcomment %}> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en"{% comment %}ly_dir_replace_for_[]_begin{% endcomment %}{% assign language = cart.attributes["language"] %}{% if language == nil %}{% assign language = shop.metafields["languages"]["default"] %}{% endif %}{% if shop.metafields.languages_dir[language] == 'rtl' %} dir="rtl" {% endif %}{% comment %}ly_dir_replace_end{% endcomment %}> <![endif]-->
+<!--[if IE 8]><html class="no-js ie8 lt-ie10 lt-ie9" lang="en"{% comment %}ly_dir_replace_for_[]_begin{% endcomment %}{% assign language = cart.attributes["language"] %}{% if language == nil %}{% assign language = shop.metafields["languages"]["default"] %}{% endif %}{% if shop.metafields.languages_dir[language] == 'rtl' %} dir="rtl" {% endif %}{% comment %}ly_dir_replace_end{% endcomment %}> <![endif]-->
+<!--[if IE 9 ]><html class="no-js ie9 lt-ie10"{% comment %}ly_dir_replace_for_[]_begin{% endcomment %}{% assign language = cart.attributes["language"] %}{% if language == nil %}{% assign language = shop.metafields["languages"]["default"] %}{% endif %}{% if shop.metafields.languages_dir[language] == 'rtl' %} dir="rtl" {% endif %}{% comment %}ly_dir_replace_end{% endcomment %}> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"{% comment %}ly_dir_replace_for_[]_begin{% endcomment %}{% assign language = cart.attributes["language"] %}{% if language == nil %}{% assign language = shop.metafields["languages"]["default"] %}{% endif %}{% if shop.metafields.languages_dir[language] == 'rtl' %} dir="rtl" {% endif %}{% comment %}ly_dir_replace_end{% endcomment %}> <!--<![endif]-->
+<head>
+<meta name="google-site-verification" content="szWZpul-aJeuJqvpL8wJL_LgqwG0TqiGoNE1mnglDvw" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>
+    {{ langify_title }}
+
+    {% if current_tags %}
+      &#8211; {{ current_tags | join: ', ' }}
+    {% endif %}
+
+    {% if current_page != 1 %}
+      &#8211; {% comment %}ly_i18n_replace_for_[ 'general.pagination.page' | t: page_number: current_page ]_begin{% endcomment %}{% capture ly_template %}{{ 'general.pagination.page' | t: page_number: current_page }}{% endcapture %}{% include 'ly-static-string' with '6183834' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% assign replacement = current_page  %}{% assign ly_template = ly_template | replace: '[[page_number]]', replacement %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}
+    {% endif %}
+
+    {% unless langify_title contains langify_shop_name %}
+      &#8211; {{ langify_shop_name }}
+    {% endunless %}
+  </title>
+
+  {% if langify_description %}
+    <meta name="description" content="{{ langify_description | escape }}" />
+  {% endif %}
+
+  {% if settings.favicon %}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png" />
+  {% endif %}
+
+  <link rel="canonical" href="{{ canonical_url }}" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  {{ content_for_header }}
+
+  {% include 'bold-common' %}
+
+
+  {% include 'social-meta' %}
+
+  <!-- Theme CSS -->
+  {% comment %}ly_asset_replace_for_[ 'theme.scss.css' | asset_url | stylesheet_tag ]_begin{% endcomment %}{% assign ly_asset = 'theme.scss.css' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  | stylesheet_tag }}{% comment %}ly_asset_replace_end{% endcomment %}
+
+  {% if settings.custom-css != blank %}
+    <style>
+      {{ settings.custom-css }}
+    </style>
+  {% endif %}
+
+  <!-- Third Party JS Libraries -->
+  {% comment %}ly_asset_replace_for_[ 'modernizr-2.8.2.min.js' | asset_url | script_tag ]_begin{% endcomment %}{% assign ly_asset = 'modernizr-2.8.2.min.js' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  | script_tag }}{% comment %}ly_asset_replace_end{% endcomment %}
+
+  <!-- Theme object -->
+  {% include 'theme-options' %}
+
+  <script>
+    window.products = {};
+  </script>
+
+  {% include 'judgeme_core' %}
+<link rel="stylesheet" type="text/css" href="{% comment %}ly_asset_replace_for_[ 'geolizr-lib.css' | asset_url ]_begin{% endcomment %}{% assign ly_asset = 'geolizr-lib.css' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  }}{% comment %}ly_asset_replace_end{% endcomment %}"/>
+<script type="text/javascript" src="{% comment %}ly_asset_replace_for_[ 'geolizr-lib.js' | asset_url ]_begin{% endcomment %}{% assign ly_asset = 'geolizr-lib.js' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  }}{% comment %}ly_asset_replace_end{% endcomment %}"></script>
+{% comment %}ly_dir_styles_begin{% endcomment %}{% assign language = cart.attributes["language"] %}{% if language == nil %}{% assign language = shop.metafields["languages"]["default"] %}{% endif %}{% if shop.metafields.languages_dir[language] == 'rtl' %}{% comment %}ly_asset_replace_for_[ 'ly-rtl.css' | asset_url | stylesheet_tag ]_begin{% endcomment %}{% assign ly_asset = 'ly-rtl.css' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  | stylesheet_tag }}{% comment %}ly_asset_replace_end{% endcomment %}{% endif %}{% comment %}ly_dir_styles_end{% endcomment %}</head>
+
+<body class="{% if customer %}customer-logged-in{% endif %} template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}  {% if settings.blog-promo %}has-promo{% endif %} {% if settings.related-products and collection.products.size > 1 and template contains 'product' %}has-related-products-{{ settings.related-products-position }}{% endif %} {% if settings.product-hover == 'quick-shop' %}has-quick-shop{% endif %} loading" >{% include 'geolizr-api' %}
+
+  {% include 'quick-shop' %}
+
+  {% section 'header' %}
+
+  <div class="main-content">
+    {{ content_for_layout }}
+  </div>
+
+  {% section 'footer' %}
+
+  <!-- Scripts -->
+  {% comment %}ly_asset_replace_for_[ 'jquery-1.11.1.min.js' | asset_url | script_tag ]_begin{% endcomment %}{% assign ly_asset = 'jquery-1.11.1.min.js' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  | script_tag }}{% comment %}ly_asset_replace_end{% endcomment %}
+  {{ 'api.jquery.js' | shopify_asset_url | script_tag }}
+
+  {% if template contains 'cart' %}
+    {{ "/services/javascripts/countries.js" | script_tag }}
+    {{ "shopify_common.js" | shopify_asset_url | script_tag }}
+    {% comment %}ly_asset_replace_for_[ 'jquery.cart.min.js' | asset_url | script_tag ]_begin{% endcomment %}{% assign ly_asset = 'jquery.cart.min.js' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  | script_tag }}{% comment %}ly_asset_replace_end{% endcomment %}
+  {% endif %}
+
+  {% if template contains 'customers' %}
+    {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+    {{ 'customer_area.js'  | shopify_asset_url | script_tag }}
+  {% endif %}
+
+  {% if settings.currency-switcher %}
+    {{ "//cdn.shopify.com/s/javascripts/currencies.js" | script_tag }}
+    {% comment %}ly_asset_replace_for_[ "jquery.currencies.js" | asset_url | script_tag ]_begin{% endcomment %}{% assign ly_asset = "jquery.currencies.js" %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  | script_tag }}{% comment %}ly_asset_replace_end{% endcomment %}
+  {% endif %}
+
+  {% comment %}ly_asset_replace_for_[ 'plugins.js'  | asset_url | script_tag ]_begin{% endcomment %}{% assign ly_asset = 'plugins.js' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  | script_tag }}{% comment %}ly_asset_replace_end{% endcomment %}
+  {% comment %}ly_asset_replace_for_[ 'theme.js'  | asset_url | script_tag ]_begin{% endcomment %}{% assign ly_asset = 'theme.js' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  | script_tag }}{% comment %}ly_asset_replace_end{% endcomment %}
+
+{% comment %}ly_static_code_begin{% endcomment %}{% include 'ly-languages' %}{% comment %}ly_static_code_end{% endcomment %}
+<script src="//cdn.codeblackbelt.com/js/modules/cool-image-magnifier/main.min.js?shop=bottines-2.myshopify.com"></script>
+{% include 'eu-cookie-banner-app' %}
+
+</body>
+</html>
+{% comment %}ly_static_code_begin{% endcomment %}{% endcapture %}{% include 'ly-static' with ly_content %}{% comment %}ly_static_code_end{% endcomment %}

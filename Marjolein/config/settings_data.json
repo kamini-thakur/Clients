@@ -1,0 +1,943 @@
+{
+  "current": {
+    "favicon": "shopify:\/\/shop_images\/STICKER6BRUIN.jpg",
+    "background-color": "#ffffff",
+    "body-background-image": "",
+    "body-text-color": "#5c5c5c",
+    "accent-color": "#cfa455",
+    "heading-color": "#222222",
+    "meta-color": "#8a8a8a",
+    "border-color": "#e4e4e4",
+    "product-badge-background-color": "#222222",
+    "button-color": "#ffffff",
+    "secondary-button-background": "#cfa455",
+    "secondary-button-color": "#ffffff",
+    "header-tools-color": "#242424",
+    "header-tools-background-color": "#f2f2f2",
+    "navigation-color": "#808080",
+    "form-select-background": "#ffffff",
+    "form-select-color": "#787878",
+    "form-select-border-color": "#e3e3e3",
+    "font-base-size": "14px",
+    "body-font": "Lato, sans-serif",
+    "heading-font": "Karla, sans-serif",
+    "heading-font-weight": "400",
+    "heading-font-small-caps": false,
+    "navigation-font": "Lato, sans-serif",
+    "navigation-font-weight": "700",
+    "navigation-font-small-caps": true,
+    "meta-font": "Lato, sans-serif",
+    "meta-font-weight": "400",
+    "meta-font-small-caps": false,
+    "button-font": "Montserrat, sans-serif",
+    "button-font-weight": "700",
+    "button-font-small-caps": true,
+    "alternative-index-layout": false,
+    "social-facebook-link": "https:\/\/www.facebook.com\/Bottines.nl",
+    "social-twitter-link": "",
+    "social-pinterest-link": "",
+    "social-instagram-link": "https:\/\/www.instagram.com\/bottines_handcraftedfootwear",
+    "social-googleplus-link": "",
+    "social-tumblr-link": "",
+    "social-youtube-link": "",
+    "social-vimeo-link": "",
+    "social-kickstarter-link": "",
+    "social-email-link": "info@bottines.nl",
+    "share-widget-facebook": true,
+    "share-widget-twitter": true,
+    "share-widget-pinterest": true,
+    "share-widget-fancy": false,
+    "share-widget-google-plus": false,
+    "share-widget-email": true,
+    "currency-switcher": true,
+    "currency-switcher-format": "money_with_currency_format",
+    "currency-switcher-supported-currencies": "EUR USD GBP HKD JPY",
+    "default_currency": "EUR",
+    "checkout_header_image": "",
+    "checkout_logo_image": "shopify:\/\/shop_images\/Bottines_handcrafted_footwear_logo_b83f2de5-310f-4187-b5be-6b7deb47d60c.jpg",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "medium",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#fff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#fafafa",
+    "checkout_heading_font": "Source Sans Pro",
+    "checkout_body_font": "Lato",
+    "checkout_accent_color": "#1990c6",
+    "checkout_button_color": "#1990c6",
+    "checkout_error_color": "#ff6d6d",
+    "ajax": false,
+    "alternative-index-layout-title-color": "#ffffff",
+    "currency-switcher-default": "CAD",
+    "customer_layout": "customer_area",
+    "logo-color": "#222222",
+    "password-mailing-list": false,
+    "sections": {
+      "section-1": {
+        "type": "home-slideshow",
+        "disabled": true,
+        "blocks": {
+          "slide-1": {
+            "type": "slide",
+            "settings": {
+              "image": "",
+              "content-alignment": "left",
+              "overlay-color": "",
+              "title": "Slide",
+              "subheading": "Introduce customers to your shop with lifestyle imagery and product photography",
+              "cta": "Button",
+              "url": ""
+            }
+          },
+          "slide-2": {
+            "type": "slide",
+            "settings": {
+              "image": "",
+              "content-alignment": "center",
+              "overlay-color": "",
+              "title": "Slide",
+              "subheading": "Introduce customers to your shop with lifestyle imagery and product photography",
+              "cta": "Button",
+              "url": ""
+            }
+          },
+          "slide-3": {
+            "type": "slide",
+            "settings": {
+              "image": "",
+              "content-alignment": "right",
+              "overlay-color": "",
+              "title": "Slide",
+              "subheading": "Introduce customers to your shop with lifestyle imagery and product photography",
+              "cta": "Button",
+              "url": ""
+            }
+          }
+        },
+        "block_order": [
+          "slide-1",
+          "slide-2",
+          "slide-3"
+        ],
+        "settings": {
+          "layout": "full-width",
+          "controls-color": "",
+          "autoplay": false,
+          "autoplay_delay": 3,
+          "autoplay-hover-pause": false
+        }
+      },
+      "section-2": {
+        "type": "home-masonry",
+        "blocks": {
+          "feature-1": {
+            "type": "image_feature",
+            "settings": {
+              "title": "",
+              "subheading": "MADE IN THE SOUTH OF FRANCE",
+              "url": "shopify:\/\/pages\/about-us",
+              "color": "white",
+              "image": "shopify:\/\/shop_images\/gardianscamargue_20120719.jpg",
+              "mobile": true
+            }
+          },
+          "feature-2": {
+            "type": "image_feature",
+            "settings": {
+              "title": "",
+              "subheading": "",
+              "url": "https:\/\/bottines.nl\/collections\/enkellaarsjes",
+              "color": "white",
+              "image": "shopify:\/\/shop_images\/Enkellaarsjes_grijs_suede_BOTTINES-318.jpg",
+              "mobile": true
+            }
+          },
+          "feature-3": {
+            "type": "image_feature",
+            "settings": {
+              "title": "",
+              "subheading": "",
+              "url": "shopify:\/\/pages\/pop-up-store",
+              "color": "white",
+              "image": "shopify:\/\/shop_images\/Pop_up.jpg",
+              "mobile": true
+            }
+          },
+          "feature-4": {
+            "type": "image_feature",
+            "settings": {
+              "title": "HANDCRAFTED",
+              "subheading": "by artisans",
+              "url": "shopify:\/\/pages\/labottegardiane",
+              "color": "white",
+              "image": "shopify:\/\/shop_images\/2014-03-03_bottegardiane_0106_copy_13f1b45b-b57b-40a0-a090-4115f65045d7.jpg",
+              "mobile": true
+            }
+          },
+          "feature-5": {
+            "type": "image_feature",
+            "settings": {
+              "title": "",
+              "subheading": "",
+              "url": "shopify:\/\/pages\/shipping",
+              "color": "black",
+              "image": "shopify:\/\/shop_images\/worldwide_shpping.png",
+              "mobile": true
+            }
+          },
+          "feature-6": {
+            "type": "image_feature",
+            "settings": {
+              "title": "",
+              "subheading": "",
+              "url": "",
+              "color": "black",
+              "image": "shopify:\/\/shop_images\/3757857_bottegardiane-0021_c54f80c7-502c-4bda-baf7-7ae5a7b11430.jpg",
+              "mobile": true
+            }
+          }
+        },
+        "block_order": [
+          "feature-1",
+          "feature-2",
+          "feature-3",
+          "feature-4",
+          "feature-5",
+          "feature-6"
+        ],
+        "settings": {
+          "layout": "content-width",
+          "gutters": true,
+          "hover": false,
+          "hover-animation": true
+        }
+      },
+      "section-3": {
+        "type": "home-collections",
+        "blocks": {
+          "1509727245898": {
+            "type": "collection",
+            "settings": {
+              "collection": "zespa-sneakers",
+              "overlay-color": "white",
+              "subheading": "",
+              "description": ""
+            }
+          },
+          "collection-1": {
+            "type": "collection",
+            "settings": {
+              "collection": "enkellaarsjes",
+              "overlay-color": "white",
+              "subheading": "",
+              "description": ""
+            }
+          },
+          "collection-3": {
+            "type": "collection",
+            "settings": {
+              "collection": "sandalen-1",
+              "overlay-color": "white",
+              "subheading": "",
+              "description": ""
+            }
+          }
+        },
+        "block_order": [
+          "1509727245898",
+          "collection-1",
+          "collection-3"
+        ],
+        "settings": {
+          "title": "",
+          "columns_range": 3
+        }
+      },
+      "section-4": {
+        "type": "home-products",
+        "disabled": true,
+        "settings": {
+          "title": "Featured collection",
+          "collection": "enkellaarsjes",
+          "product-columns": 3,
+          "product-rows": 3,
+          "product-vendor": true,
+          "product-hover": "quick-shop",
+          "product_stock_level_threshold": 5,
+          "product-badges": true,
+          "product-badges-icons": true
+        }
+      },
+      "section-5": {
+        "type": "home-social-widgets",
+        "blocks": {
+          "1518256123034": {
+            "type": "instagram",
+            "settings": {
+              "username": "bottines_handcraftedfootwear",
+              "access-token": "251119047.1677ed0.3286a02de0c34f25b632e1a4194b84d3"
+            }
+          }
+        },
+        "block_order": [
+          "1518256123034"
+        ],
+        "settings": {
+          "title": ""
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo": "shopify:\/\/shop_images\/Bottines_handcrafted_footwear_logo_b83f2de5-310f-4187-b5be-6b7deb47d60c.jpg",
+          "header_layout": "default",
+          "header_full_width": false,
+          "header_border": false,
+          "sticky_header": false,
+          "sticky_header_logo": false,
+          "menu": "main-menu",
+          "mega-nav-handle": "",
+          "mega-nav-image-default": "",
+          "mega-nav-1": "",
+          "mega-nav-2": "",
+          "mega-nav-3": ""
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "1509093382801": {
+            "type": "menu",
+            "settings": {
+              "menu": "footer"
+            }
+          },
+          "1509297336486": {
+            "type": "menu",
+            "settings": {
+              "menu": "about"
+            }
+          },
+          "1509093408830": {
+            "type": "menu",
+            "settings": {
+              "menu": "social-media"
+            }
+          },
+          "1509093481280": {
+            "type": "newsletter",
+            "settings": {}
+          }
+        },
+        "block_order": [
+          "1509093382801",
+          "1509297336486",
+          "1509093408830",
+          "1509093481280"
+        ],
+        "settings": {
+          "headings": true,
+          "footer-payment-options": true
+        }
+      },
+      "collection": {
+        "type": "collection",
+        "settings": {
+          "show_collection_image": false,
+          "show_description": true,
+          "sorting": false,
+          "tag_filtering": false,
+          "layout": "default",
+          "products_per_row": 3,
+          "number_of_rows": 12,
+          "product-vendor": true,
+          "product-hover": "image-flip",
+          "product_stock_level_threshold": 1,
+          "product-badges": false,
+          "product-badges-icons": false
+        }
+      },
+      "home-masonry-alternative": {
+        "type": "home-masonry-alternative",
+        "settings": {
+          "logo": "",
+          "color": "",
+          "gutters": false,
+          "hover": false
+        }
+      },
+      "product": {
+        "type": "product",
+        "settings": {
+          "vendor": true,
+          "page-layout": "default",
+          "images-layout": "list-view",
+          "zoom": false,
+          "related-products": true,
+          "related-products-position": "below",
+          "ajax": false,
+          "share-buttons": false
+        }
+      }
+    },
+    "content_for_index": [
+      "section-1",
+      "section-2",
+      "section-3",
+      "section-4",
+      "section-5"
+    ]
+  },
+  "presets": {
+    "Bright": {
+      "accent-color": "#fecda5",
+      "ajax": true,
+      "alternative-index-layout": true,
+      "alternative-index-layout-title-color": "#ffffff",
+      "background-color": "#ffffff",
+      "body-font": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+      "body-text-color": "#807e7d",
+      "border-color": "#e4e4e4",
+      "button-color": "#ffffff",
+      "button-font": "Karla, sans-serif",
+      "button-font-small-caps": false,
+      "button-font-weight": "400",
+      "currency-switcher": true,
+      "currency-switcher-default": "CAD",
+      "currency-switcher-format": "money_with_currency_format",
+      "currency-switcher-supported-currencies": "CAD USD GBP AUD JPY",
+      "customer_layout": "customer_area",
+      "form-select-background": "#ffffff",
+      "form-select-border-color": "#e3e3e3",
+      "form-select-color": "#787878",
+      "header-tools-background-color": "#f2f2f2",
+      "header-tools-color": "#242424",
+      "heading-color": "#1f25d9",
+      "heading-font": "Karla, sans-serif",
+      "heading-font-small-caps": false,
+      "heading-font-weight": "400",
+      "logo-color": "#222222",
+      "meta-color": "#cccccc",
+      "meta-font": "Karla, sans-serif",
+      "meta-font-small-caps": true,
+      "meta-font-weight": "400",
+      "navigation-color": "#808080",
+      "navigation-font": "Karla, sans-serif",
+      "navigation-font-small-caps": false,
+      "navigation-font-weight": "400",
+      "password-mailing-list": false,
+      "product-badge-background-color": "#222222",
+      "secondary-button-background": "#ffb8d1",
+      "secondary-button-color": "#ffffff",
+      "share-widget-email": true,
+      "share-widget-facebook": true,
+      "share-widget-fancy": true,
+      "share-widget-google-plus": true,
+      "share-widget-pinterest": true,
+      "share-widget-twitter": true,
+      "sections": {
+        "section-1": {
+          "type": "home-slideshow",
+          "blocks": {
+            "slide-1": {
+              "type": "slide",
+              "settings": {
+                "content-alignment": "left"
+              }
+            },
+            "slide-2": {
+              "type": "slide",
+              "settings": {}
+            },
+            "slide-3": {
+              "type": "slide",
+              "settings": {
+                "content-alignment": "right"
+              }
+            }
+          },
+          "block_order": [
+            "slide-1",
+            "slide-2",
+            "slide-3"
+          ],
+          "settings": {}
+        },
+        "section-2": {
+          "type": "home-collections",
+          "blocks": {
+            "collection-1": {
+              "type": "collection",
+              "settings": {}
+            },
+            "collection-2": {
+              "type": "collection",
+              "settings": {}
+            },
+            "collection-3": {
+              "type": "collection",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "collection-1",
+            "collection-2",
+            "collection-3"
+          ],
+          "settings": {}
+        },
+        "section-3": {
+          "type": "home-social-widgets",
+          "settings": {}
+        }
+      },
+      "content_for_index": [
+        "section-1",
+        "section-2",
+        "section-3"
+      ]
+    },
+    "Light": {
+      "accent-color": "#7bebcf",
+      "ajax": false,
+      "alternative-index-layout": false,
+      "alternative-index-layout-title-color": "#ffffff",
+      "background-color": "#ffffff",
+      "body-font": "Lato, sans-serif",
+      "body-text-color": "#5c5c5c",
+      "border-color": "#e4e4e4",
+      "button-color": "#ffffff",
+      "button-font": "Lora, serif",
+      "button-font-small-caps": false,
+      "button-font-weight": "400",
+      "currency-switcher": true,
+      "currency-switcher-default": "CAD",
+      "currency-switcher-format": "money_with_currency_format",
+      "currency-switcher-supported-currencies": "CAD USD GBP AUD JPY",
+      "customer_layout": "customer_area",
+      "form-select-background": "#ffffff",
+      "form-select-border-color": "#e3e3e3",
+      "form-select-color": "#787878",
+      "header-tools-background-color": "#f2f2f2",
+      "header-tools-color": "#242424",
+      "heading-color": "#222222",
+      "heading-font": "Karla, sans-serif",
+      "heading-font-small-caps": false,
+      "heading-font-weight": "400",
+      "logo-color": "#222222",
+      "meta-color": "#8a8a8a",
+      "meta-font": "Lato, sans-serif",
+      "meta-font-small-caps": false,
+      "meta-font-weight": "400",
+      "navigation-color": "#808080",
+      "navigation-font": "Lato, sans-serif",
+      "navigation-font-small-caps": false,
+      "navigation-font-weight": "400",
+      "password-mailing-list": false,
+      "product-badge-background-color": "#222222",
+      "secondary-button-background": "#69dbca",
+      "secondary-button-color": "#ffffff",
+      "share-widget-email": true,
+      "share-widget-facebook": true,
+      "share-widget-fancy": true,
+      "share-widget-google-plus": true,
+      "share-widget-pinterest": true,
+      "share-widget-twitter": true,
+      "sections": {
+        "section-1": {
+          "type": "home-slideshow",
+          "blocks": {
+            "slide-1": {
+              "type": "slide",
+              "settings": {
+                "content-alignment": "left"
+              }
+            },
+            "slide-2": {
+              "type": "slide",
+              "settings": {}
+            },
+            "slide-3": {
+              "type": "slide",
+              "settings": {
+                "content-alignment": "right"
+              }
+            }
+          },
+          "block_order": [
+            "slide-1",
+            "slide-2",
+            "slide-3"
+          ],
+          "settings": {}
+        },
+        "section-2": {
+          "type": "home-masonry",
+          "blocks": {
+            "feature-1": {
+              "type": "image_feature",
+              "settings": {}
+            },
+            "feature-2": {
+              "type": "image_feature",
+              "settings": {}
+            },
+            "feature-3": {
+              "type": "image_feature",
+              "settings": {}
+            },
+            "feature-4": {
+              "type": "image_feature",
+              "settings": {}
+            },
+            "feature-5": {
+              "type": "image_feature",
+              "settings": {}
+            },
+            "feature-6": {
+              "type": "image_feature",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "feature-1",
+            "feature-2",
+            "feature-3",
+            "feature-4",
+            "feature-5",
+            "feature-6"
+          ],
+          "settings": {}
+        },
+        "section-3": {
+          "type": "home-collections",
+          "blocks": {
+            "collection-1": {
+              "type": "collection",
+              "settings": {}
+            },
+            "collection-2": {
+              "type": "collection",
+              "settings": {}
+            },
+            "collection-3": {
+              "type": "collection",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "collection-1",
+            "collection-2",
+            "collection-3"
+          ],
+          "settings": {}
+        },
+        "section-4": {
+          "type": "home-products",
+          "settings": {}
+        },
+        "section-5": {
+          "type": "home-social-widgets",
+          "settings": {}
+        }
+      },
+      "content_for_index": [
+        "section-1",
+        "section-2",
+        "section-3",
+        "section-4",
+        "section-5"
+      ]
+    },
+    "Moody": {
+      "accent-color": "#82a2bd",
+      "ajax": false,
+      "alternative-index-layout": false,
+      "alternative-index-layout-title-color": "#ffffff",
+      "background-color": "#e8e8e8",
+      "body-font": "'Noticia Text', serif",
+      "body-text-color": "#5c5c5c",
+      "border-color": "#d4d4d4",
+      "button-color": "#ffffff",
+      "button-font": "'Archivo Narrow', sans-serif",
+      "button-font-small-caps": true,
+      "button-font-weight": "700",
+      "currency-switcher": true,
+      "currency-switcher-default": "CAD",
+      "currency-switcher-format": "money_with_currency_format",
+      "currency-switcher-supported-currencies": "CAD USD GBP AUD JPY",
+      "customer_layout": "customer_area",
+      "form-select-background": "#ffffff",
+      "form-select-border-color": "#ffffff",
+      "form-select-color": "#787878",
+      "header-tools-background-color": "#f2f2f2",
+      "header-tools-color": "#242424",
+      "heading-color": "#222222",
+      "heading-font": "'Archivo Narrow', sans-serif",
+      "heading-font-small-caps": false,
+      "heading-font-weight": "700",
+      "logo-color": "#222222",
+      "meta-color": "#8a8a8a",
+      "meta-font": "'Archivo Narrow', sans-serif",
+      "meta-font-small-caps": true,
+      "meta-font-weight": "400",
+      "navigation-color": "#808080",
+      "navigation-font": "'Archivo Narrow', sans-serif",
+      "navigation-font-small-caps": true,
+      "navigation-font-weight": "400",
+      "password-mailing-list": false,
+      "product-badge-background-color": "#222222",
+      "secondary-button-background": "#82a2bd",
+      "secondary-button-color": "#ffffff",
+      "share-widget-email": true,
+      "share-widget-facebook": true,
+      "share-widget-fancy": true,
+      "share-widget-google-plus": true,
+      "share-widget-pinterest": true,
+      "share-widget-twitter": true,
+      "sections": {
+        "section-1": {
+          "type": "home-slideshow",
+          "blocks": {
+            "slide-1": {
+              "type": "slide",
+              "settings": {
+                "content-alignment": "left"
+              }
+            },
+            "slide-2": {
+              "type": "slide",
+              "settings": {}
+            },
+            "slide-3": {
+              "type": "slide",
+              "settings": {
+                "content-alignment": "right"
+              }
+            }
+          },
+          "block_order": [
+            "slide-1",
+            "slide-2",
+            "slide-3"
+          ],
+          "settings": {}
+        },
+        "section-2": {
+          "type": "home-masonry",
+          "blocks": {
+            "feature-1": {
+              "type": "image_feature",
+              "settings": {}
+            },
+            "feature-2": {
+              "type": "image_feature",
+              "settings": {}
+            },
+            "feature-3": {
+              "type": "image_feature",
+              "settings": {}
+            },
+            "feature-4": {
+              "type": "image_feature",
+              "settings": {}
+            },
+            "feature-5": {
+              "type": "image_feature",
+              "settings": {}
+            },
+            "feature-6": {
+              "type": "image_feature",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "feature-1",
+            "feature-2",
+            "feature-3",
+            "feature-4",
+            "feature-5",
+            "feature-6"
+          ],
+          "settings": {}
+        },
+        "section-3": {
+          "type": "home-collections",
+          "blocks": {
+            "collection-1": {
+              "type": "collection",
+              "settings": {}
+            },
+            "collection-2": {
+              "type": "collection",
+              "settings": {}
+            },
+            "collection-3": {
+              "type": "collection",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "collection-1",
+            "collection-2",
+            "collection-3"
+          ],
+          "settings": {}
+        },
+        "section-4": {
+          "type": "home-social-widgets",
+          "settings": {}
+        }
+      },
+      "content_for_index": [
+        "section-1",
+        "section-2",
+        "section-3",
+        "section-4"
+      ]
+    },
+    "Warm": {
+      "accent-color": "#9e8953",
+      "ajax": false,
+      "alternative-index-layout": false,
+      "alternative-index-layout-title-color": "#ffffff",
+      "background-color": "#f2eee8",
+      "body-font": "Lora, serif",
+      "body-text-color": "#696868",
+      "border-color": "#e0dcd3",
+      "button-color": "#ffffff",
+      "button-font": "Karla, sans-serif",
+      "button-font-small-caps": false,
+      "button-font-weight": "400",
+      "currency-switcher": true,
+      "currency-switcher-default": "CAD",
+      "currency-switcher-format": "money_with_currency_format",
+      "currency-switcher-supported-currencies": "CAD USD GBP AUD JPY",
+      "customer_layout": "customer_area",
+      "form-select-background": "#ffffff",
+      "form-select-border-color": "#e3e3e3",
+      "form-select-color": "#787878",
+      "header-tools-background-color": "#e0dcd3",
+      "header-tools-color": "#8f8c82",
+      "heading-color": "#60504d",
+      "heading-font": "Raleway, sans-serif",
+      "heading-font-small-caps": false,
+      "heading-font-weight": "700",
+      "logo-color": "#60504d",
+      "meta-color": "#b3b3b3",
+      "meta-font": "Karla, sans-serif",
+      "meta-font-small-caps": true,
+      "meta-font-weight": "400",
+      "navigation-color": "#808080",
+      "navigation-font": "Raleway, sans-serif",
+      "navigation-font-small-caps": true,
+      "navigation-font-weight": "400",
+      "password-mailing-list": false,
+      "product-badge-background-color": "#222222",
+      "secondary-button-background": "#a3997f",
+      "secondary-button-color": "#ffffff",
+      "share-widget-email": true,
+      "share-widget-facebook": true,
+      "share-widget-fancy": true,
+      "share-widget-google-plus": true,
+      "share-widget-pinterest": true,
+      "share-widget-twitter": true,
+      "sections": {
+        "section-1": {
+          "type": "home-slideshow",
+          "blocks": {
+            "slide-1": {
+              "type": "slide",
+              "settings": {
+                "content-alignment": "left"
+              }
+            },
+            "slide-2": {
+              "type": "slide",
+              "settings": {}
+            },
+            "slide-3": {
+              "type": "slide",
+              "settings": {
+                "content-alignment": "right"
+              }
+            }
+          },
+          "block_order": [
+            "slide-1",
+            "slide-2",
+            "slide-3"
+          ],
+          "settings": {}
+        },
+        "section-2": {
+          "type": "home-masonry",
+          "blocks": {
+            "feature-1": {
+              "type": "image_feature",
+              "settings": {}
+            },
+            "feature-2": {
+              "type": "image_feature",
+              "settings": {}
+            },
+            "feature-3": {
+              "type": "image_feature",
+              "settings": {}
+            },
+            "feature-4": {
+              "type": "image_feature",
+              "settings": {}
+            },
+            "feature-5": {
+              "type": "image_feature",
+              "settings": {}
+            },
+            "feature-6": {
+              "type": "image_feature",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "feature-1",
+            "feature-2",
+            "feature-3",
+            "feature-4",
+            "feature-5",
+            "feature-6"
+          ],
+          "settings": {}
+        },
+        "section-3": {
+          "type": "home-collections",
+          "blocks": {
+            "collection-1": {
+              "type": "collection",
+              "settings": {}
+            },
+            "collection-2": {
+              "type": "collection",
+              "settings": {}
+            },
+            "collection-3": {
+              "type": "collection",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "collection-1",
+            "collection-2",
+            "collection-3"
+          ],
+          "settings": {}
+        }
+      },
+      "content_for_index": [
+        "section-1",
+        "section-2",
+        "section-3"
+      ]
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}<div id="iStock-wrapper" style="display:none;">
+	<h2><ly-as-6184067>Out Of Stock!</ly-as-6184067></h2>
+	<p id="iStock-notifyTxt"><ly-as-6184068>We will notify you when this product becomes available.</ly-as-6184068></p>
+	<div id="iStock-availability" style="display:none">
+		<label><ly-as-6184069>Availability Date:</ly-as-6184069> </label>
+		<span></span>
+	</div>
+	<div id="iStock-fields">
+		<input type="text" id="iStock-email-id" name="iStock-email-id" placeholder="<ly-as-6184072>Email Address</ly-as-6184072>" value="{% if customer %}{{ customer.email }}{% endif %}" />
+		<input type="hidden" id="iStock-product" name="iStock-product" value="{% comment %}ly_code_replace_for_[ product.title | escape ]_begin{% endcomment %}{% include 'ly-title' with product %}{{ ly_translation | escape }}{% comment %}ly_code_replace_end{% endcomment %}" />
+		<input type="button" id="iStock-notify-btn" value="<ly-as-6184070>Notify Me</ly-as-6184070>" />
+	</div>
+	<div id="iStock-msg"></div>
+</div>
+<script type="text/javascript">
+	var iStockShop = "{{ shop.permanent_domain }}";
+	var iStockProductId = {{ product.id }};
+	var iStockVariants = {{ product.variants | json }};
+</script>
+<script src="https://istock.shopapps.in/front/iStock-notify.php?shop={{ shop.permanent_domain }}"></script>

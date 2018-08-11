@@ -1,0 +1,94 @@
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}
+<section
+  class="blog"
+  {% if section.settings.tag-filter %}data-tag-filter{% endif %}
+  data-section-id="{{ section.id }}"
+  data-section-type="blog-static">
+  <h1 class="page-title">{% comment %}ly_code_replace_for_[ blog.title ]_begin{% endcomment %}{% include 'ly-title' with blog %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</h1>
+
+  {% include 'breadcrumbs' %}
+
+  {% include 'section-blog-sidebar' %}
+
+  <div class="blog-wrapper">
+    {% paginate blog.articles by section.settings.articles_per_page %}
+
+      <div class="blog-posts">
+        {% for article in blog.articles %}
+          {% include 'section-blog-post' %}
+        {% else %}
+          <span class="empty">{% comment %}ly_i18n_replace_for_[ 'blogs.blog.empty' | t ]_begin{% endcomment %}{% capture ly_template %}{{ 'blogs.blog.empty' | t }}{% endcapture %}{% include 'ly-static-string' with '6183868' %}{% if ly_translation %}{% assign escape_content = true %}{% assign ly_template = ly_translation %}{% else %}{% assign escape_content = false %}{% endif %}{% if escape_content %}{{ ly_template | escape}}{% else %}{{ ly_template }}{% endif %}{% comment %}ly_i18n_replace_end{% endcomment %}</span>
+        {% endfor %}
+
+        {% if paginate.previous or paginate.next %}
+          {% include 'pagination' %}
+        {% endif %}
+      </div>
+
+    {% endpaginate %}
+
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'promotional-image' -%}
+        {% include 'block-blog-promo' %}
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": [
+    {
+      "type": "range",
+      "id": "articles_per_page",
+      "label": "Posts per page",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 10
+    },
+    {
+      "type": "checkbox",
+      "id": "tag-filter",
+      "label": "Show tag filter"
+    },
+    {
+      "type": "checkbox",
+      "id": "rss-icon",
+      "label": "Show subscribe link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "promotional-image",
+      "name": "Promotional image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subheading"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        }
+      ],
+      "limit": 1
+    }
+  ]
+}
+
+{% endschema %}
